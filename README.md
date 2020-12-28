@@ -1,7 +1,7 @@
 # MatrixCalculator
 A matrix calculator for performing row operations on matrices and using the results to solve linear algebra problems.
 
-MatrixString - Creates string that visually represents matrices and augmeneted matrices.
+MatrixString - Creates strings that visually represents matrices and augmeneted matrices and can be printed to the console.
 
 RowOperations - Performs elementary row operations on matrices.
 
