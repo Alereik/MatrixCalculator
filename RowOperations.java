@@ -7,14 +7,14 @@ package matrixCalculator;
  *
  */
 public class RowOperations {
-    
+
     /*
      * Integer arrays will have a length of 2, with the first element holding the value of the
      * numerator of a fraction and the second element holding the value of the denominator.
      */
     final static int NUMERATOR = 0;
     final static int DENOMINATOR = 1;
-    
+
     /**
      * This method multiplies an integer by another integer by converting numerical characters in a
      * string to integers, multiplying them, and converting them back into string literals.
@@ -25,16 +25,12 @@ public class RowOperations {
      */
     public static String integerMultiplication(String factor1, String factor2) {
         String product;
-        try {
-            int firstFactor = Integer.parseInt(factor1);
-            int secondFactor = Integer.parseInt(factor2);
-            product = String.valueOf(firstFactor * secondFactor);
-        } catch (NumberFormatException e) {
-            return null;            
-        }
+        int firstFactor = Integer.parseInt(factor1);
+        int secondFactor = Integer.parseInt(factor2);
+        product = String.valueOf(firstFactor * secondFactor);
         return product;
     }
-    
+
     /**
      * This method reduces fractions split into an int array of length 2, where the first index of 
      * the array is the numerator and the second index of the array is the denominator.
@@ -58,20 +54,20 @@ public class RowOperations {
             }
         }
         int smallerNum = (fractionArr[NUMERATOR] > fractionArr[DENOMINATOR]) ? 
-                  fractionArr[DENOMINATOR] : fractionArr[NUMERATOR];
-        //smaller number is greatest POSSIBLE common factor
-        for (int i = 1; i <= smallerNum; ++i) {
-            if ((fractionArr[NUMERATOR] % i == 0) && (fractionArr[DENOMINATOR] % i == 0)) {
-                reduced[NUMERATOR] = fractionArr[NUMERATOR] / i;
-                reduced[DENOMINATOR] = fractionArr[DENOMINATOR] / i;
+            fractionArr[DENOMINATOR] : fractionArr[NUMERATOR];
+            //smaller number is greatest POSSIBLE common factor
+            for (int i = 1; i <= smallerNum; ++i) {
+                if ((fractionArr[NUMERATOR] % i == 0) && (fractionArr[DENOMINATOR] % i == 0)) {
+                    reduced[NUMERATOR] = fractionArr[NUMERATOR] / i;
+                    reduced[DENOMINATOR] = fractionArr[DENOMINATOR] / i;
+                }
             }
-        }
-        if (negativeFraction) {
-            reduced[NUMERATOR] *= -1;
-        }
-        return reduced;
+            if (negativeFraction) {
+                reduced[NUMERATOR] *= -1;
+            }
+            return reduced;
     }
-    
+
     /**
      * This method takes a fraction in string form and splits it along the '/' character, parsing 
      * the integers and putting them into an array.
@@ -83,26 +79,19 @@ public class RowOperations {
      * @return splitFraction The array containing the numerator and denominator of the fraction.
      */
     public static int[] splitFraction(String fraction) {
-        if (fraction == null || !fraction.contains("/")) {
-            return null;
-        }
         String[] split = fraction.split("/");
         int[] splitFraction = new int[2];
-        try {
-            splitFraction[NUMERATOR] = Integer.parseInt(split[0]);//splitFraction[0]
-            splitFraction[DENOMINATOR] = Integer.parseInt(split[1]);//splitFraction[1]
-            //reduce fraction if possible
-            splitFraction = reduceFraction(splitFraction);
-            //if zero denominator
-            if (splitFraction[DENOMINATOR] == 0) {
-                return null;
-            }
-        } catch (NumberFormatException e) {
+        splitFraction[NUMERATOR] = Integer.parseInt(split[0]);//splitFraction[0]
+        splitFraction[DENOMINATOR] = Integer.parseInt(split[1]);//splitFraction[1]
+        //reduce fraction if possible
+        splitFraction = reduceFraction(splitFraction);
+        //if zero denominator
+        if (splitFraction[DENOMINATOR] == 0) {
             return null;
         }
         return splitFraction;
     }
-    
+
     /**
      * This method adds two fractions together. Any parameters not in fraction form are converted
      * to fractions at the start of the method.
@@ -123,36 +112,32 @@ public class RowOperations {
         int[] secondFraction = splitFraction(fraction2);
         int[] sumFraction = new int[2];
         String sum = "";
-        try {
-            //same denominator
-            if (firstFraction[DENOMINATOR] == secondFraction[DENOMINATOR]) {
-                sumFraction[NUMERATOR] = firstFraction[NUMERATOR] + secondFraction[NUMERATOR];
-                sumFraction[DENOMINATOR] = firstFraction[DENOMINATOR];
-            }
-            //different denominators
-            else {
-                    sumFraction[NUMERATOR] = 
-                          (firstFraction[NUMERATOR] * secondFraction[DENOMINATOR])
-                          + (secondFraction[NUMERATOR] * firstFraction[DENOMINATOR]);
-     
-                    sumFraction[DENOMINATOR] = 
-                          (firstFraction[DENOMINATOR] * secondFraction[DENOMINATOR]);
-            }
-            //reduce resulting fraction if possible
-            sumFraction = reduceFraction(sumFraction);
-            //numerator equal to denominator
-            if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
-                sum = "1";
-            }
-            //denominator of 1
-            else if (sumFraction[DENOMINATOR] == 1) {
-                sum = String.valueOf(sumFraction[NUMERATOR]);
-            }
-            else {
-                sum += sumFraction[NUMERATOR] + "/" + sumFraction[DENOMINATOR];
-            }
-        } catch (NullPointerException e) {
-            return null;
+        //same denominator
+        if (firstFraction[DENOMINATOR] == secondFraction[DENOMINATOR]) {
+            sumFraction[NUMERATOR] = firstFraction[NUMERATOR] + secondFraction[NUMERATOR];
+            sumFraction[DENOMINATOR] = firstFraction[DENOMINATOR];
+        }
+        //different denominators
+        else {
+            sumFraction[NUMERATOR] = 
+                (firstFraction[NUMERATOR] * secondFraction[DENOMINATOR])
+                + (secondFraction[NUMERATOR] * firstFraction[DENOMINATOR]);
+
+            sumFraction[DENOMINATOR] = 
+                (firstFraction[DENOMINATOR] * secondFraction[DENOMINATOR]);
+        }
+        //reduce resulting fraction if possible
+        sumFraction = reduceFraction(sumFraction);
+        //numerator equal to denominator
+        if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
+            sum = "1";
+        }
+        //denominator of 1
+        else if (sumFraction[DENOMINATOR] == 1) {
+            sum = String.valueOf(sumFraction[NUMERATOR]);
+        }
+        else {
+            sum += sumFraction[NUMERATOR] + "/" + sumFraction[DENOMINATOR];
         }
         return sum;
     }
@@ -169,35 +154,29 @@ public class RowOperations {
     public static String fractionIntScaling(String fraction, String scalar) {
         int[] splitFraction = splitFraction(fraction);
         String product;
-        try {
-            //zero scalar
-            if (scalar == "0") {
-                return "0";
-            }            
-            splitFraction[NUMERATOR] *= Integer.parseInt(scalar);
-            //reduce fraction is possible
-            splitFraction = reduceFraction(splitFraction);
-            //numerator equal to denominator
-            if (splitFraction[NUMERATOR] == splitFraction[DENOMINATOR]) {
-                if (splitFraction[DENOMINATOR] == 0) {
-                    product = "0";
-                }
-                else {
-                    product = "1";
-                }    
-            }
-            //denominator equal to 1
-            else if (splitFraction[DENOMINATOR] == 1) {
-                product = String.valueOf(splitFraction[NUMERATOR]);
+        //zero scalar
+        if (scalar == "0") {
+            return "0";
+        }            
+        splitFraction[NUMERATOR] *= Integer.parseInt(scalar);
+        //reduce fraction is possible
+        splitFraction = reduceFraction(splitFraction);
+        //numerator equal to denominator
+        if (splitFraction[NUMERATOR] == splitFraction[DENOMINATOR]) {
+            if (splitFraction[DENOMINATOR] == 0) {
+                product = "0";
             }
             else {
-                product = splitFraction[NUMERATOR] + "/" 
-                          + splitFraction[DENOMINATOR];
-            }
-        } catch (NullPointerException e) {
-            return null;
-        } catch (NumberFormatException e1) {
-            return null;
+                product = "1";
+            }    
+        }
+        //denominator equal to 1
+        else if (splitFraction[DENOMINATOR] == 1) {
+            product = String.valueOf(splitFraction[NUMERATOR]);
+        }
+        else {
+            product = splitFraction[NUMERATOR] + "/" 
+                + splitFraction[DENOMINATOR];
         }
         return product;
     }
@@ -215,30 +194,26 @@ public class RowOperations {
         int[] firstFraction = splitFraction(fraction1);
         int[] secondFraction = splitFraction(fraction2);
         String product;
-        try {
-            int[] productFraction = new int[] {firstFraction[NUMERATOR] * secondFraction[NUMERATOR],
-                                          firstFraction[DENOMINATOR] * secondFraction[DENOMINATOR]};
-            //reduce fraction if possible
-            productFraction = reduceFraction(productFraction);
-            //numerator equal to denominator
-            if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
-                if (productFraction[DENOMINATOR] == 0) {
-                    product = "0";
-                }
-                else {
-                    product = "1";
-                } 
-            }
-            //denominator equal to 1
-            else if (productFraction[DENOMINATOR] == 1) {
-                product = String.valueOf(productFraction[NUMERATOR]);
+        int[] productFraction = new int[] {firstFraction[NUMERATOR] * secondFraction[NUMERATOR],
+            firstFraction[DENOMINATOR] * secondFraction[DENOMINATOR]};
+        //reduce fraction if possible
+        productFraction = reduceFraction(productFraction);
+        //numerator equal to denominator
+        if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
+            if (productFraction[DENOMINATOR] == 0) {
+                product = "0";
             }
             else {
-                product = productFraction[NUMERATOR] + "/" 
-                          + productFraction[DENOMINATOR];
-            }
-        } catch (NullPointerException e) {
-            return null;            
+                product = "1";
+            } 
+        }
+        //denominator equal to 1
+        else if (productFraction[DENOMINATOR] == 1) {
+            product = String.valueOf(productFraction[NUMERATOR]);
+        }
+        else {
+            product = productFraction[NUMERATOR] + "/" 
+                + productFraction[DENOMINATOR];
         }
         return product;
     }
@@ -256,35 +231,26 @@ public class RowOperations {
             return null;
         }
         String[] scaledRow = new String[matrix[0].length];
-        try {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                //turn empty elements into zeros
-                if (matrix[rowIndex][j].equals("")) {
-                    matrix[rowIndex][j] = "0";
-                }
-                //both factors are fractions
-                if (matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
-                    scaledRow[j] = fractionMultiplication(matrix[rowIndex][j], scalar);
-                }
-                //only the row element factor is a fraction
-                else if (matrix[rowIndex][j].contains("/") && !scalar.contains("/")) {
-                    scaledRow[j] = fractionIntScaling(matrix[rowIndex][j], scalar);
-                }
-                //only the scalar is a fraction
-                else if (!matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
-                    scaledRow[j] = fractionIntScaling(scalar, matrix[rowIndex][j]);
-                }
-                //both factors are integers
-                else {
-                    scaledRow[j] = integerMultiplication(matrix[rowIndex][j], scalar);
-                }            
+        for (int j = 0; j < matrix[0].length; ++j) {
+            //both factors are fractions
+            if (matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
+                scaledRow[j] = fractionMultiplication(matrix[rowIndex][j], scalar);
             }
-        } catch (NullPointerException e) {
-            return null;
+            //only the row element factor is a fraction
+            else if (matrix[rowIndex][j].contains("/") && !scalar.contains("/")) {
+                scaledRow[j] = fractionIntScaling(matrix[rowIndex][j], scalar);
+            }
+            //only the scalar is a fraction
+            else if (!matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
+                scaledRow[j] = fractionIntScaling(scalar, matrix[rowIndex][j]);
+            }
+            //both factors are integers
+            else {
+                scaledRow[j] = integerMultiplication(matrix[rowIndex][j], scalar);
+            }            
         }
         return scaledRow;
-    }
-    
+    } 
 
     /**
      * This method multiplies a row in the matrix by a scalar and adds it to another row in the
@@ -304,38 +270,49 @@ public class RowOperations {
             return null;
         }
         String[][] newMatrix = new String[matrix.length][matrix[0].length];
-        try {
-            //scale row to be added to specified row
-            String[] scaledRow = scaleRow(matrix, rowScaled, scalar);
-            //build new matrix
-            for (int i = 0; i < matrix.length; ++i) {
-                for (int j = 0; j < matrix[0].length; ++j) {
-                    //turn empty element strings into zeroes
-                    if (matrix[i][j].equals("")) {
-                        matrix[i][j] = "0";
-                    }
-                    //added scaled elements from scaled row to elements from specified row
-                    if (i == rowAddedTo) {
-                        newMatrix[i][j] = fractionAddition(matrix[i][j], scaledRow[j]);
-                    }
-                    //copy all other elements from all other rows
-                    else {
-                        newMatrix[i][j] = matrix[i][j];
-                    }
+        //scale row to be added to specified row
+        String[] scaledRow = scaleRow(matrix, rowScaled, scalar);
+        //build new matrix
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                //added scaled elements from scaled row to elements from specified row
+                if (i == rowAddedTo) {
+                    newMatrix[i][j] = fractionAddition(matrix[i][j], scaledRow[j]);
+                }
+                //copy all other elements from all other rows
+                else {
+                    newMatrix[i][j] = matrix[i][j];
                 }
             }
-        } catch (NullPointerException e) {
-            return null;
         }
         return newMatrix;
     }
     
     /**
-     * This method swaps two rows in the matrix with each other.
+     * This method returns a matrix with two rows that were swapped relative to their positions in
+     * the original matrix.
      * 
-     * @return
+     * @param matrix     The original matrix containing the two rows to have their positions 
+     *                   swapped.
+     * @param row1       The row to be swapped into row2's position.
+     * @param row2       The row to be swapped into row1's position.
+     * @return newMatrix The resulting matrix with the swapped rows.
      */
     public static String[][] swapRows(String[][] matrix, int row1, int row2) {
-        return null;
+        String[][] newMatrix = new String[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[0].length; ++j) {
+                if (i == row1) {
+                    newMatrix[i][j] = matrix[row2][j];
+                }
+                else if (i == row2) {
+                    newMatrix[i][j] = matrix[row1][j];
+                }
+                else {
+                    newMatrix[i][j] = matrix[i][j];
+                }
+            }
+        }
+        return newMatrix;
     }
 }
