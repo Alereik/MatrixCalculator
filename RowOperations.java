@@ -1,4 +1,4 @@
-package matrixString;
+package matrixCalculator;
 
 /**
  * This class performs elementary row operations on matrices.
