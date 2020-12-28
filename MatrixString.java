@@ -1,4 +1,4 @@
-package matrixString;
+package matrixCalculator;
 
 public class MatrixString {
     
