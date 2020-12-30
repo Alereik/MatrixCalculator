@@ -1,7 +1,7 @@
 package MatrixCalculator;
 
 /**
- * This class performs Gauss-Jordan reduction through row operations on matrices in order to row 
+ * This class performs row reduction through row operations on matrices in order to row 
  * reduce them into Reduced Row Echelon Form (RREF).
  * 
  * @author AOsterndorff
@@ -102,7 +102,7 @@ public class RowReduction {
     } 
     
     /**
-     * This method copies the original matrix into a newMatrix that Gauss-Jordan reduction will be
+     * This method copies the original matrix into a newMatrix that row reduction will be
      * performed on to reduce the matrix to Reduced Row Echelon Form (RREF). It calls the 
      * rowReductionInColumn method to conduct the row reduction by incrementing column and rows. If
      * no row operations took place as indicated by a null return of rowReductionInColumn, then the
