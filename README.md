@@ -5,7 +5,4 @@ MatrixString - Creates strings that visually represents matrices and augmeneted 
 
 RowOperations - Performs elementary row operations on matrices.
 
-
-
-12/28/2020: - In MatrixString class: Created getMatrixWidth method, then rewrote printMatrix and both printAugmentedMatrix methods to call this method in order to reduce repeated               code. Removed exception handling, as that should be unnecessary with proper code concerning the initialization of the matrices and vectors.
-            - All exception handling in RowOperations class removed, as it resulted in too much unnecessary code and if the code for building the intitial matrix is done                         properly, none of the currently handled exceptions should ever occur in this class.
+RowReduction - Performs row reduction on matrices to convert them into reduced row echelon form.
