@@ -16,58 +16,13 @@ public class TestRowOperations {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        testIntegerMultiplication();
         testReduceFraction();
         testSplitFraction();
         testFractionAddition();        
-        testFractionIntScaling();
         testFractionMultiplication();
         testScaleRow();
         testAddScaledRow();
         testSwapRows();
-    }
-    
-    /**
-     * This method tests the integerMultiplication method.
-     */
-    public static void testIntegerMultiplication() {
-        boolean allPassed = true;
-        {//test 1: two valid parameters
-            String factor1 = "4";
-            String factor2 = "5";
-            String expected = "20";
-            String actual = RowOperations.integerMultiplication(factor1, factor2);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual  
-                                   + "\ntestIntegerMultiplication: Test 1 failed");
-                allPassed = false;
-            }
-        }
-        {//test 2: two valid parameters, one negative
-            String factor1 = "4";
-            String factor2 = "-5";
-            String expected = "-20";
-            String actual = RowOperations.integerMultiplication(factor1, factor2);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual  
-                                   + "\ntestIntegerMultiplication: Test 2 failed");
-                allPassed = false;
-            }
-        }
-        {//test 3: two valid parameters, both negative
-            String factor1 = "-4";
-            String factor2 = "-5";
-            String expected = "20";
-            String actual = RowOperations.integerMultiplication(factor1, factor2);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual  
-                                   + "\ntestIntegerMultiplication: Test 3 failed");
-                allPassed = false;
-            }
-        }
-        if (allPassed) {
-            System.out.println("All testIntegerMultiplication tests passed");
-        }
     }
     
     /**
@@ -295,82 +250,6 @@ public class TestRowOperations {
         }
         if (allPassed) {
             System.out.println("All testFractionAddition tests passed");
-        }
-    }
-    
-    /**
-     * This method tests the fractionIntScaling method.
-     */
-    public static void testFractionIntScaling() {
-        boolean allPassed = true;
-        {//test 1: valid parameters
-            String fraction = "3/4";
-            String scalar = "5";
-            String expected = "15/4";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual  
-                                   + "\ntestfractionIntScaling: Test 1 failed");
-                allPassed = false;
-            }
-        }
-        {//test 2: reducible fraction
-            String fraction = "12/18";
-            String scalar = "5";
-            String expected = "10/3";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
-                                   + "\ntestfractionIntScaling: Test 2 failed");
-                allPassed = false;
-            }
-        }
-        {//test 3: numerator equal to denominator
-            String fraction = "3/15";
-            String scalar = "5";
-            String expected = "1";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
-                                   + "\ntestfractionIntScaling: Test 3 failed");
-                allPassed = false;
-            }
-        }
-        {//test 4: denominator equal to 1
-            String fraction = "3/1";
-            String scalar = "5";
-            String expected = "15";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
-                                   + "\ntestfractionIntScaling: Test 4 failed");
-                allPassed = false;
-            }
-        }
-        {//test 5: reducible scaled fraction should be reduced
-            String fraction = "1/20";
-            String scalar = "5";
-            String expected = "1/4";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (!expected.equals(actual)) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
-                                   + "\ntestfractionIntScaling: Test 5 failed");
-                allPassed = false;
-            }
-        }
-        {//test 6: zero factor
-            String fraction = "3/4";
-            String scalar = "0";
-            String expected = "0";
-            String actual = RowOperations.fractionIntScaling(fraction, scalar);
-            if (expected != actual) {
-                System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
-                                   + "\ntestfractionIntScaling: Test 6 failed");
-                allPassed = false;
-            }
-        }
-        if (allPassed) {
-            System.out.println("All testFractionIntScaling tests passed");
         }
     }
     

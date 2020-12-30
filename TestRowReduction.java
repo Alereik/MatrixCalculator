@@ -200,6 +200,19 @@ public class TestRowReduction {
                 allPassed = false;
             }  
         }
+        {//test 7: singular square matrix
+            String[][] matrix = new String[][] {{"1", "-1", "3"}, 
+                                                {"1", "3", "-3"}, 
+                                                {"5", "3", "3"}};
+            String[][] expected = new String[][] {{"1", "0", "3/2"}, 
+                                                  {"0", "1", "-3/2"}, 
+                                                  {"0", "0", "0"}};
+            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            if (!Arrays.deepEquals(expected, actual)) {
+                System.out.println("testRowReduce: Test 7 failed");
+                allPassed = false;
+            }  
+        }
         if (allPassed) {
             System.out.println("All testRowReduce tests passed");
         }

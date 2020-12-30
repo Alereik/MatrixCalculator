@@ -16,22 +16,6 @@ public class RowOperations {
     final static int DENOMINATOR = 1;
 
     /**
-     * This method multiplies an integer by another integer by converting numerical characters in a
-     * string to integers, multiplying them, and converting them back into string literals.
-     * 
-     * @param factor1  The first string from which numerical characters are parsed and multiplied.
-     * @param factor2  The second string from which numerical characters are parsed and multiplied.
-     * @return product The string containing the numerical characters of the product.
-     */
-    public static String integerMultiplication(String factor1, String factor2) {
-        String product;
-        int firstFactor = Integer.parseInt(factor1);
-        int secondFactor = Integer.parseInt(factor2);
-        product = String.valueOf(firstFactor * secondFactor);
-        return product;
-    }
-
-    /**
      * This method reduces fractions split into an int array of length 2, where the first index of 
      * the array is the numerator and the second index of the array is the denominator.
      * 
@@ -129,11 +113,11 @@ public class RowOperations {
         //reduce resulting fraction if possible
         sumFraction = reduceFraction(sumFraction);
         //numerator equal to denominator
-        if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
-            sum = "1";
+        if (sumFraction[NUMERATOR] == 0) {
+            return "0";
         }
-        else if (sumFraction[NUMERATOR] == 0) {
-            sum = "0";
+        if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
+            return "1";
         }
         //denominator of 1
         else if (sumFraction[DENOMINATOR] == 1) {
@@ -146,45 +130,6 @@ public class RowOperations {
     }
     
     /**
-     * This method multiplies a fraction by an integer by calling the splitFraction method to 
-     * convert the numerical characters in the fraction string to integers, multiplying the 
-     * numerator by the intFactor, and converting the result into a string.
-     * 
-     * @param fraction  The string representation of the fraction to be scaled.
-     * @param scalar The string representation of the integer to scale the fraction by.
-     * @return product  The resultant scaled fraction.
-     */
-    public static String fractionIntScaling(String fraction, String scalar) {
-        int[] splitFraction = splitFraction(fraction);
-        String product;
-        //zero scalar
-        if (scalar == "0") {
-            return "0";
-        }            
-        splitFraction[NUMERATOR] *= Integer.parseInt(scalar);
-        //reduce fraction is possible
-        splitFraction = reduceFraction(splitFraction);
-        //numerator equal to denominator
-        if (splitFraction[NUMERATOR] == splitFraction[DENOMINATOR]) {
-            if (splitFraction[NUMERATOR] == 0) {
-                product = "0";
-            }
-            else {
-                product = "1";
-            }    
-        }
-        //denominator equal to 1
-        else if (splitFraction[DENOMINATOR] == 1) {
-            product = String.valueOf(splitFraction[NUMERATOR]);
-        }
-        else {
-            product = splitFraction[NUMERATOR] + "/" 
-                + splitFraction[DENOMINATOR];
-        }
-        return product;
-    }
-    
-    /**
      * This method multiplies a fraction by another fraction by calling the splitFraction method to
      * convert the numerical characters in the fractions string to integers, multiplying the 
      * numerators and denominators by each other, and converting the result into a string.
@@ -194,6 +139,13 @@ public class RowOperations {
      * @return product  The resultant product of the two multiplied fractions.
      */
     public static String fractionMultiplication(String fraction1, String fraction2) {
+        //convert non fractions to fractions
+        if (!fraction1.contains("/")) {
+            fraction1 += "/1";
+        }
+        if (!fraction2.contains("/")) {
+            fraction2 += "/1";
+        }
         int[] firstFraction = splitFraction(fraction1);
         int[] secondFraction = splitFraction(fraction2);
         String product;
@@ -202,13 +154,11 @@ public class RowOperations {
         //reduce fraction if possible
         productFraction = reduceFraction(productFraction);
         //numerator equal to denominator
+        if (productFraction[NUMERATOR] == 0) {
+            return "0";
+        }
         if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
-            if (productFraction[NUMERATOR] == 0) {
-                product = "0";
-            }
-            else {
-                product = "1";
-            } 
+                return "1";
         }
         //denominator equal to 1
         else if (productFraction[DENOMINATOR] == 1) {
@@ -235,22 +185,7 @@ public class RowOperations {
         }
         String[] scaledRow = new String[matrix[0].length];
         for (int j = 0; j < matrix[0].length; ++j) {
-            //both factors are fractions
-            if (matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
-                scaledRow[j] = fractionMultiplication(matrix[rowIndex][j], scalar);
-            }
-            //only the row element factor is a fraction
-            else if (matrix[rowIndex][j].contains("/") && !scalar.contains("/")) {
-                scaledRow[j] = fractionIntScaling(matrix[rowIndex][j], scalar);
-            }
-            //only the scalar is a fraction
-            else if (!matrix[rowIndex][j].contains("/") && scalar.contains("/")) {
-                scaledRow[j] = fractionIntScaling(scalar, matrix[rowIndex][j]);
-            }
-            //both factors are integers
-            else {
-                scaledRow[j] = integerMultiplication(matrix[rowIndex][j], scalar);
-            }            
+            scaledRow[j] = fractionMultiplication(matrix[rowIndex][j], scalar);
         }
         return scaledRow;
     } 
