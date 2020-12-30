@@ -180,9 +180,6 @@ public class RowOperations {
      * @return scaledRow The scaled row.
      */
     public static String[] scaleRow(String[][] matrix, int rowIndex, String scalar) {
-        if (matrix == null || scalar == null || scalar.equals("")) {
-            return null;
-        }
         String[] scaledRow = new String[matrix[0].length];
         for (int j = 0; j < matrix[0].length; ++j) {
             scaledRow[j] = fractionMultiplication(matrix[rowIndex][j], scalar);
@@ -204,9 +201,6 @@ public class RowOperations {
      */
     public static String[][] addScaledRow(String[][] matrix, int rowAddedTo, int rowScaled, 
                                           String scalar) {
-        if (matrix == null || scalar == null || scalar.equals("")) {
-            return null;
-        }
         String[][] newMatrix = new String[matrix.length][matrix[0].length];
         //scale row to be added to specified row
         String[] scaledRow = scaleRow(matrix, rowScaled, scalar);
