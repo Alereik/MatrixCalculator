@@ -114,10 +114,10 @@ public class RowOperations {
         sumFraction = reduceFraction(sumFraction);
         //numerator equal to denominator
         if (sumFraction[NUMERATOR] == 0) {
-            return "0";
+            sum = "0";
         }
         else if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
-            return "1";
+            sum = "1";
         }
         //denominator of 1
         else if (sumFraction[DENOMINATOR] == 1) {
@@ -155,10 +155,10 @@ public class RowOperations {
         productFraction = reduceFraction(productFraction);
         //numerator equal to denominator
         if (productFraction[NUMERATOR] == 0) {
-            return "0";
+            product = "0";
         }
         else if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
-                return "1";
+            product = "1";
         }
         //denominator equal to 1
         else if (productFraction[DENOMINATOR] == 1) {
