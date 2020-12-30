@@ -17,8 +17,8 @@ public class TestMatrixString {
      */
     public static void main(String[] args) {
         testEqualizeElementWidth();
-        testprintMatrix();
-        testPrintAugmentedMatrix();
+        testGetMatrixString();
+        testGetAugmentedMatrixString();
     }
     
     /**
@@ -60,7 +60,7 @@ public class TestMatrixString {
     /**
      * This method tests the generateMatrix and the getMatrixWidth methods.
      */
-    public static void testprintMatrix() {
+    public static void testGetMatrixString() {
         boolean allPassed = true;
         {//test 1: single character
             String[][] matrixArr = new String[3][3];
@@ -76,7 +76,7 @@ public class TestMatrixString {
                             + "|         |\n"
                             + "| 0  0  0 |\n"
                            + "\\         /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
                                    + "\ntestPrintMatrix: Test 1 failed");
@@ -97,7 +97,7 @@ public class TestMatrixString {
                             + "|                                    |\n"
                             + "| 1234567890  1234567890  1234567890 |\n"
                            + "\\                                    /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
                                    + "\ntestPrintMatrix: Test 2 failed");
@@ -115,7 +115,7 @@ public class TestMatrixString {
                             + "|                                    |\n"
                             + "| 1234567890  1234567890  1234567890 |\n"
                            + "\\                                    /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual 
                                    + "\ntestPrintMatrix: Test 3 failed");
@@ -130,7 +130,7 @@ public class TestMatrixString {
                             + "|              |\n"
                             + "|   0    12345 |\n"
                            + "\\              /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintMatrix: Test 4 failed");
@@ -148,7 +148,7 @@ public class TestMatrixString {
                             + "|                        |\n"
                             + "| 1234567890  1234567890 |\n"
                            + "\\                        /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintMatrix: Test 5 failed");
@@ -172,7 +172,7 @@ public class TestMatrixString {
                             + "|                                                            |\n"
                             + "| 1234567890  123456789    12345678    1234567      123456   |\n"
                            + "\\                                                            /\n";
-            String actual = MatrixString.printMatrix(matrixArr);
+            String actual = MatrixString.getMatrixString(matrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintMatrix: Test 6 failed");
@@ -187,7 +187,7 @@ public class TestMatrixString {
     /**
      *  This method tests both of the printAugmentedMatrix methods and the getMatrixWidth method.
      */
-    public static void testPrintAugmentedMatrix() {
+    public static void testGetAugmentedMatrixString() {
         boolean allPassed = true;
         {//test 1: 2x2 matrix and 2x1 vector
             String[][] matrixArr = new String[2][2];
@@ -203,7 +203,7 @@ public class TestMatrixString {
                              + "|      |   |\n"
                              + "| 0  0 | 0 |\n"
                             + "\\      |   /\n";
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, vectorArr);
+            String actual = MatrixString.getAugmentedMatrixString(matrixArr, vectorArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintAugmentedMatrix: Test 1 failed");
@@ -225,7 +225,7 @@ public class TestMatrixString {
                              + "|                                |       |\n" 
                              + "| 123456  123456  123456  123456 |   0   |\n"
                             + "\\                                |       /\n";
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, vectorArr);
+            String actual = MatrixString.getAugmentedMatrixString(matrixArr, vectorArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintAugmentedMatrix: Test 2 failed");
@@ -246,7 +246,7 @@ public class TestMatrixString {
                              + "|      |      |\n"
                              + "| 0  0 | 0  0 |\n"
                             + "\\      |      /\n";
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, augMatrixArr);
+            String actual = MatrixString.getAugmentedMatrixString(matrixArr, augMatrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintAugmentedMatrix: Test 3 failed");
@@ -265,53 +265,10 @@ public class TestMatrixString {
                              + "|                        |                     |\n" 
                              + "| 123456  123456  123456 | 12345    0      0   |\n"
                             + "\\                        |                     /\n";
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, augMatrixArr);
+            String actual = MatrixString.getAugmentedMatrixString(matrixArr, augMatrixArr);
             if(!actual.equals(expected)) {
                 System.out.println("expected:\n" + expected + "\nactual:\n" + actual
                                    + "\ntestPrintAugmentedMatrix: Test 4 failed");
-                allPassed = false;
-            }
-        }
-        {//test 5: 3x3 matrix and 2x1 vector
-            String[][] matrixArr = new String[][] {{"123", "1", "12"}, {"0", "0", "1"},
-                                                     {"123456", "123456", "123456"}};
-            String[] vectorArr = new String[] {"1234", "1/3"};
-            String expected = null;
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, vectorArr);
-            if(actual != expected) {
-                System.out.println("testPrintAugmentedMatrix: Test 5 failed");
-                allPassed = false;
-            }
-        }
-        {//test 6: 2x3 matrix and 3x1 vector
-            String[][] matrixArr = new String[][] {{"123", "1", "12"}, {"0", "0", "1"}};
-            String[] vectorArr = new String[] {"1234", "1/3", "0"};
-            String expected = null;
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, vectorArr);
-            if(actual != expected) {
-                System.out.println("testPrintAugmentedMatrix: Test 6 failed");
-                allPassed = false;
-            }
-        }
-        {//test 7: 3x3 matrix and 2x3 matrix
-            String[][] matrixArr = new String[][] {{"123", "1", "12"}, {"0", "0", "1"},
-                                                     {"123456", "123456", "123456"}};
-            String[][] augMatrixArr = new String[][] {{"1234", "1/3", "0"}, {"2", "12345", "0"}};
-            String expected = null;
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, augMatrixArr);
-            if(actual != expected) {
-                System.out.println("testPrintAugmentedMatrix: Test 7 failed");
-                allPassed = false;
-            }
-        }
-        {//test 8: 2x3 matrix and 3x3 matrix
-            String[][] matrixArr = new String[][] {{"123", "1", "12"}, {"0", "0", "1"}};
-            String[][] augMatrixArr = new String[][] {{"1234", "1/3", "0"}, {"2", "12345", "0"},
-                                                      {"12345", "0", "0"}};
-            String expected = null;
-            String actual = MatrixString.printAugmentedMatrix(matrixArr, augMatrixArr);
-            if(actual != expected) {
-                System.out.println("testPrintAugmentedMatrix: Test 8 failed");
                 allPassed = false;
             }
         }

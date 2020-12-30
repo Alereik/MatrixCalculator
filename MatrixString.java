@@ -137,7 +137,7 @@ public class MatrixString {
      * @param matrix             The two-dimensional array.
      * @return matrixPrintString The visual representation of the matrix in the form of a string.
      */
-    public static String printMatrix(String[][] matrix) {
+    public static String getMatrixString(String[][] matrix) {
         //call equalizeElementWidth to create matrix with element strings of equal length
         String[][] equalMatrixArr = equalizeElementWidth(matrix);
         //get width of matrix to build rows without elements
@@ -168,12 +168,7 @@ public class MatrixString {
      * @param vector             The vector on the right side of the augmented matrix.
      * @return matrixPrintString The string that visually represents the augmented matrix.
      */
-    public static String printAugmentedMatrix(String[][] matrix, String[] vector) {
-        //ensure matrix and vector are of compatible sizes
-        if (matrix.length != vector.length) {
-            System.out.println("The number of rows do not match");
-            return null;
-        }
+    public static String getAugmentedMatrixString(String[][] matrix, String[] vector) {
         //call equalizeElementWidth to create arrays with element strings of equal length
         String[][] equalMatrixArr = equalizeElementWidth(matrix);
         String[] equalVectorArr = equalizeElementWidth(vector);
@@ -210,12 +205,7 @@ public class MatrixString {
      * @param rightMatrix        The matrix on the right side of the augmented matrix.
      * @return matrixPrintString The string that visually represents the augmented matrix.
      */
-    public static String printAugmentedMatrix(String[][] matrix, String[][] rightMatrix) {
-        //ensure matrices are of compatible sizes
-        if (matrix.length != rightMatrix.length) {
-            System.out.println("Number of rows must be the same for both matrices");
-            return null;
-        }
+    public static String getAugmentedMatrixString(String[][] matrix, String[][] rightMatrix) {
         //call equalizeElementWidth to create arrays with element strings of equal length
         String[][] equalMatrixArr = equalizeElementWidth(matrix);
         String[][] equalAugMatrix = equalizeElementWidth(rightMatrix);
@@ -243,5 +233,55 @@ public class MatrixString {
             }
         }
         return matrixPrintString;
-    }      
+    } 
+    
+    /**
+     * This method prints out a string representation of a matrix or augmented matrix depending on
+     * the difference between the width of the parameter matrix and the leftMatrixWidth parameter.
+     * If the two are the same, then the matrix is not an augmented matrix and is simply printed.
+     * If leftMatrix width is less than the width of the parameter matrix, then the matrix is split 
+     * into its constituent parts before printing.
+     * 
+     * @param matrix          The entire matrix. May be an augmented matrix.
+     * @param leftMatrixWidth The width of the matrix to the left of an augmentation border, if any.
+     */
+    public static void printMatrix(String[][] matrix, int leftMatrixWidth) {
+        //non augmented matrix
+        if (matrix[0].length - leftMatrixWidth == 0) {
+            System.out.println(getMatrixString(matrix));
+        }
+        //matrix augmented with a vector
+        else if (matrix[0].length - leftMatrixWidth == 1) {
+            String[][] leftMatrix = new String[matrix.length][leftMatrixWidth];
+            String[] rightVector = new String[matrix.length];
+            for (int i = 0; i < matrix.length; ++i) {
+                for (int j = 0; j < matrix[0].length; ++j) {
+                    if (j < leftMatrixWidth) {
+                        leftMatrix[i][j] = matrix[i][j];
+                    }
+                    else {
+                        rightVector[i] = matrix[i][j];
+                    }
+                }
+            }
+            System.out.println(getAugmentedMatrixString(leftMatrix, rightVector));
+        }
+        //matrix augmented with another matrix
+        else if (matrix[0].length - leftMatrixWidth > 1 ) {
+            String[][] leftMatrix = new String[matrix.length][leftMatrixWidth];
+            String[][] rightMatrix = new String[matrix.length][ matrix[0].length - leftMatrixWidth];
+            for (int i = 0; i < matrix.length; ++i) {
+                for (int j = 0; j < matrix[0].length; ++j) {
+                    if (j < leftMatrixWidth) {
+                        leftMatrix[i][j] = matrix[i][j];
+                    }
+                    else {
+                        rightMatrix[i][j - leftMatrixWidth] = matrix[i][j];
+                    }
+                }
+            }
+            System.out.println(getAugmentedMatrixString(leftMatrix, rightMatrix));
+        }
+
+    }
 }

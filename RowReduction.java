@@ -52,7 +52,7 @@ public class RowReduction {
      *    reciprocals.
      * 3) The first non zero row found is swapped with the starting row to become the pivot row.
      * 4) The pivot row is scaled to the negative of all other non zero values in the column and 
-     *    is then add to those rows so that the pivot row has the only non zero value remaining in 
+     *    is then added to those rows so that the pivot row has the only non zero value remaining in 
      *    that column.
      * 5) If no non zero value is found from the starting row index to the end of the column, then 
      *    the method returns null to indicate that no row operations took place.
@@ -63,7 +63,7 @@ public class RowReduction {
      * @return newMatrix     The altered parameter matrix.
      */
     public static String[][] rowReductionInColumn(String[][] newMatrix, int startRow, int col) {
-        //System.out.println(MatrixString.printMatrix(newMatrix));//////////////////////////////////
+        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
         boolean firstNonzeroRow = true;
         int rowToBePivot = startRow;
         for (int i = startRow; i < newMatrix.length; ++i) {
@@ -76,12 +76,12 @@ public class RowReduction {
             if (!newMatrix[i][col].equals("0") && !newMatrix[i][col].equals("1")) {
                 String reciprocal = getReciprocal(newMatrix[i][col]);
                 newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
-                //System.out.println(MatrixString.printMatrix(newMatrix));//////////////////////////
+                //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////
             }           
         }
         //swap first non zero row to pivot row
         newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
-        //System.out.println(MatrixString.printMatrix(newMatrix));//////////////////////////////////
+        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {
@@ -93,11 +93,11 @@ public class RowReduction {
                     negativeElement = "-" + newMatrix[i][col];
                 }
                 newMatrix = RowOperations.addScaledRow(newMatrix, i, startRow, negativeElement);
-                //System.out.println(MatrixString.printMatrix(newMatrix));//////////////////////////
+                //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////
             }
         }
         if (firstNonzeroRow) return null;
-        //System.out.println(MatrixString.printMatrix(newMatrix));//////////////////////////////////
+        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
         return newMatrix;
     } 
     
@@ -124,7 +124,8 @@ public class RowReduction {
         }
         //iteration by both row and column
         for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {            
-            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j); 
+            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j);
+            //row does not increment if non zero value not found in last iteration
             if (tempMatrix == null) {
                 --i;
                 continue;
@@ -133,6 +134,7 @@ public class RowReduction {
                 newMatrix = tempMatrix;
             }
         }
+        MatrixString.printMatrix(newMatrix, leftMatrixWidth);
         return newMatrix;
     }
 }
