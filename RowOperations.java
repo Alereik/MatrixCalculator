@@ -116,7 +116,7 @@ public class RowOperations {
         if (sumFraction[NUMERATOR] == 0) {
             return "0";
         }
-        if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
+        else if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
             return "1";
         }
         //denominator of 1
@@ -157,7 +157,7 @@ public class RowOperations {
         if (productFraction[NUMERATOR] == 0) {
             return "0";
         }
-        if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
+        else if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
                 return "1";
         }
         //denominator equal to 1
