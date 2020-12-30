@@ -17,8 +17,8 @@ public class TestRowReduction {
      */
     public static void main(String[] args) {
         testGetReciprocal();
-        testRowReduce();
         testRowReductionInColumn();
+        testRowReduce();
     }
     
     /**
@@ -108,7 +108,6 @@ public class TestRowReduction {
                 allPassed = false;
             }
         }
-        //TODO augmented matrix tests
         if (allPassed) {
             System.out.println("All testRowReduceInColumn tests passed");
         }
@@ -172,6 +171,32 @@ public class TestRowReduction {
             String[][] actual = RowReduction.rowReduce(matrix, matrix[0].length);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 4 failed");
+                allPassed = false;
+            }  
+        }
+        {//test 5: augmented matrix comprised of 3x3 matrix and 3x1 vector
+            String[][] matrix = new String[][] {{"1", "2", "3", "6"}, 
+                                                {"2", "-3", "2","14"}, 
+                                                {"3", "1", "-1", "-2"}};
+            String[][] expected = new String[][] {{"1", "0", "0", "1"}, 
+                                                  {"0", "1", "0", "-2"}, 
+                                                  {"0", "0", "1", "3"}};
+            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            if (!Arrays.deepEquals(expected, actual)) {
+                System.out.println("testRowReduce: Test 5 failed");
+                allPassed = false;
+            }  
+        }
+        {//test 6: augmented matrix comprised of 3x3 matrix and 3x3 matrix
+            String[][] matrix = new String[][] {{"1", "1", "1", "1","0", "0"}, 
+                                                {"0", "2", "3","0","1", "0"}, 
+                                                {"5", "5", "1", "0","0", "1"}};
+            String[][] expected = new String[][] {{"1", "0", "0", "13/8","-1/2", "-1/8"}, 
+                                                  {"0", "1", "0", "-15/8","1/2", "3/8"}, 
+                                                  {"0", "0", "1", "5/4","0", "-1/4"}};
+            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            if (!Arrays.deepEquals(expected, actual)) {
+                System.out.println("testRowReduce: Test 6 failed");
                 allPassed = false;
             }  
         }
