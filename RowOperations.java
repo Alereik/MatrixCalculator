@@ -1,4 +1,4 @@
-package matrixCalculator;
+package MatrixCalculator;
 
 /**
  * This class performs elementary row operations on matrices.
@@ -132,6 +132,9 @@ public class RowOperations {
         if (sumFraction[NUMERATOR] == sumFraction[DENOMINATOR]) {
             sum = "1";
         }
+        else if (sumFraction[NUMERATOR] == 0) {
+            sum = "0";
+        }
         //denominator of 1
         else if (sumFraction[DENOMINATOR] == 1) {
             sum = String.valueOf(sumFraction[NUMERATOR]);
@@ -163,7 +166,7 @@ public class RowOperations {
         splitFraction = reduceFraction(splitFraction);
         //numerator equal to denominator
         if (splitFraction[NUMERATOR] == splitFraction[DENOMINATOR]) {
-            if (splitFraction[DENOMINATOR] == 0) {
+            if (splitFraction[NUMERATOR] == 0) {
                 product = "0";
             }
             else {
@@ -200,7 +203,7 @@ public class RowOperations {
         productFraction = reduceFraction(productFraction);
         //numerator equal to denominator
         if (productFraction[NUMERATOR] == productFraction[DENOMINATOR]) {
-            if (productFraction[DENOMINATOR] == 0) {
+            if (productFraction[NUMERATOR] == 0) {
                 product = "0";
             }
             else {

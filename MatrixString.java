@@ -1,4 +1,4 @@
-package matrixCalculator;
+package MatrixCalculator;
 
 public class MatrixString {
     
@@ -7,30 +7,30 @@ public class MatrixString {
      * returns a new array containing white space padded elements from the parameter array so that
      * the element strings are of equal length.
      * 
-     * @param vectorArr             The input parameter vector array.
+     * @param vector                The input parameter vector array.
      * @return equalizedVectorArr   The new vector array with elements of equal length.
      */
-    public static String[] equalizeElementWidth(String[] vectorArr) {
-        String[] equalizedVectorArr = new String[vectorArr.length];
+    public static String[] equalizeElementWidth(String[] vector) {
+        String[] equalizedVectorArr = new String[vector.length];
         //find length of longest element
         int greatestLength = 0;
-        for (int i = 0; i < vectorArr.length; ++i) {
-            if (vectorArr[i].length() > greatestLength) {
-                greatestLength = vectorArr[i].length();
+        for (int i = 0; i < vector.length; ++i) {
+            if (vector[i].length() > greatestLength) {
+                greatestLength = vector[i].length();
             }
         }
         //pad shorter elements with whitespace to equalize their length with longest element
-        for (int i = 0; i < vectorArr.length; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             String padLeft = "";
             String padRight = "";
-            int difference = greatestLength - vectorArr[i].length();
+            int difference = greatestLength - vector[i].length();
             //even number of spaces to pad element
             if (difference % 2 ==0) {
                 for (int j = 0; j < difference / 2; ++j) {
                     padLeft += " ";
                     padRight += " ";                    
                 }
-                equalizedVectorArr[i] = padLeft + vectorArr[i] + padRight;
+                equalizedVectorArr[i] = padLeft + vector[i] + padRight;
             }
             //odd number of spaces to pad element puts one more padding space on right side
             else {
@@ -39,7 +39,7 @@ public class MatrixString {
                     padRight += " ";                    
                 }
                 padRight += " ";
-                equalizedVectorArr[i] = padLeft + vectorArr[i] + padRight;
+                equalizedVectorArr[i] = padLeft + vector[i] + padRight;
             }
         }
         return equalizedVectorArr;
@@ -50,34 +50,34 @@ public class MatrixString {
      * returns a new array containing white space padded elements from the parameter array so that 
      * the element strings are of equal length.
      * 
-     * @param matrixArr             The input parameter matrix array.
+     * @param matrix                The input parameter matrix array.
      * @return equalizedMatrixArr   The new matrix array with elements of equal length.
      */
-    public static String[][] equalizeElementWidth(String[][] matrixArr) {
-        String[][] equalizedMatrixArr = new String[matrixArr.length][matrixArr[0].length];
+    public static String[][] equalizeElementWidth(String[][] matrix) {
+        String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];
         //find length of longest element
         int greatestLength = 0;
-        for (int i = 0; i < matrixArr.length; ++i) {
-            for (int j = 0; j < matrixArr[i].length; ++j) {
-                if (matrixArr[i][j].length() > greatestLength) {
-                    greatestLength = matrixArr[i][j].length();
+        for (int i = 0; i < matrix.length; ++i) {
+            for (int j = 0; j < matrix[i].length; ++j) {
+                if (matrix[i][j].length() > greatestLength) {
+                    greatestLength = matrix[i][j].length();
                 }
             }
         }
         //add whitespace padding to shorter elements to match longest element
-        for (int i = 0; i < matrixArr.length; ++i) {
+        for (int i = 0; i < matrix.length; ++i) {
             int difference = 0;
-            for (int j = 0; j < matrixArr[i].length; ++j) {
+            for (int j = 0; j < matrix[i].length; ++j) {
                 String padLeft = "";
                 String padRight = "";
-                difference = greatestLength - matrixArr[i][j].length();
+                difference = greatestLength - matrix[i][j].length();
                 //even number of spaces to pad element
                 if (difference % 2 == 0) {
                     for (int k = 0; k < difference / 2; ++k) {
                         padLeft += " ";
                         padRight += " ";
                     }
-                    equalizedMatrixArr[i][j] = padLeft + matrixArr[i][j] + padRight;
+                    equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
                 }
                 //odd number of spaces to pad element puts one more padding space on right side
                 else {
@@ -86,7 +86,7 @@ public class MatrixString {
                         padRight += " ";
                     }
                     padRight += " ";
-                    equalizedMatrixArr[i][j] = padLeft + matrixArr[i][j] + padRight;
+                    equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
                 }
             }
         }
@@ -99,16 +99,16 @@ public class MatrixString {
      * facilitates correct spacing between the parenthesis of the matrix, as well as correct spacing 
      * between parenthesis and the augmentation border of augmented matrices.
      * 
-     * @param matrixArr    The matrix whose width needs to be determined. Should have been equalized
+     * @param matrix       The matrix whose width needs to be determined. Should have been equalized
      *                     prior to the calling of this method.
      * @return matrixWidth The string of length equal to the matrix's width.
      */
-    public static String getMatrixWidth(String[][] matrixArr) {
+    public static String getMatrixWidth(String[][] matrix) {
         String matrixWidth = "";
         int elementWidth = 0;
         //sum the lengths of all elements
-        for (int j = 0; j < matrixArr[0].length; ++j) {
-            elementWidth += matrixArr[0][j].length();
+        for (int j = 0; j < matrix[0].length; ++j) {
+            elementWidth += matrix[0][j].length();
             //each element padded with 2 spaces, one on either side
             matrixWidth += "  ";
         }
@@ -134,12 +134,12 @@ public class MatrixString {
      * - Finally, a string constituting a visual representation of the matrix is generated and
      *   returned.
      * 
-     * @param matrixArr          The two-dimensional array.
+     * @param matrix             The two-dimensional array.
      * @return matrixPrintString The visual representation of the matrix in the form of a string.
      */
-    public static String printMatrix(String[][] matrixArr) {
+    public static String printMatrix(String[][] matrix) {
         //call equalizeElementWidth to create matrix with element strings of equal length
-        String[][] equalMatrixArr = equalizeElementWidth(matrixArr);
+        String[][] equalMatrixArr = equalizeElementWidth(matrix);
         //get width of matrix to build rows without elements
         String matrixWidth = getMatrixWidth(equalMatrixArr);
         //generate a string representation of the matrix
@@ -164,19 +164,19 @@ public class MatrixString {
      * This method returns a string that visually represents an augmented matrix consisting of a
      * a matrix and a vector.
      * 
-     * @param matrixArr          The matrix on the left side of the augmented matrix.
-     * @param augVectorArr       The vector on the right side of the augmented matrix.
+     * @param matrix             The matrix on the left side of the augmented matrix.
+     * @param vector             The vector on the right side of the augmented matrix.
      * @return matrixPrintString The string that visually represents the augmented matrix.
      */
-    public static String printAugmentedMatrix(String[][] matrixArr, String[] augVectorArr) {
+    public static String printAugmentedMatrix(String[][] matrix, String[] vector) {
         //ensure matrix and vector are of compatible sizes
-        if (matrixArr.length != augVectorArr.length) {
+        if (matrix.length != vector.length) {
             System.out.println("The number of rows do not match");
             return null;
         }
         //call equalizeElementWidth to create arrays with element strings of equal length
-        String[][] equalMatrixArr = equalizeElementWidth(matrixArr);
-        String[] equalVectorArr = equalizeElementWidth(augVectorArr);
+        String[][] equalMatrixArr = equalizeElementWidth(matrix);
+        String[] equalVectorArr = equalizeElementWidth(vector);
         //get widths of matrix and vector to build rows without elements
         String leftMatrixWidth = getMatrixWidth(equalMatrixArr);
         String rightVectorWidth = "  ";//two padding spaces, one on each side of the element
@@ -206,19 +206,19 @@ public class MatrixString {
      * This method returns a string that visually represents an augmented matrix consisting of two
      * matrices.
      * 
-     * @param matrixArr          The matrix on the left side of the augmented matrix.
-     * @param augMatrixArr       The matrix on the right side of the augmented matrix.
+     * @param matrix             The matrix on the left side of the augmented matrix.
+     * @param rightMatrix        The matrix on the right side of the augmented matrix.
      * @return matrixPrintString The string that visually represents the augmented matrix.
      */
-    public static String printAugmentedMatrix(String[][] matrixArr, String[][] augMatrixArr) {
+    public static String printAugmentedMatrix(String[][] matrix, String[][] rightMatrix) {
         //ensure matrices are of compatible sizes
-        if (matrixArr.length != augMatrixArr.length) {
+        if (matrix.length != rightMatrix.length) {
             System.out.println("Number of rows must be the same for both matrices");
             return null;
         }
         //call equalizeElementWidth to create arrays with element strings of equal length
-        String[][] equalMatrixArr = equalizeElementWidth(matrixArr);
-        String[][] equalAugMatrix = equalizeElementWidth(augMatrixArr);
+        String[][] equalMatrixArr = equalizeElementWidth(matrix);
+        String[][] equalAugMatrix = equalizeElementWidth(rightMatrix);
         //get widths of matrices to build rows without elements
         String leftMatrixWidth = getMatrixWidth(equalMatrixArr);
         String rightMatrixWidth = getMatrixWidth(equalAugMatrix);
