@@ -98,7 +98,7 @@ public class RowReduction {
      *   the method returns null to indicate that no row operations took place.
      *       
      * - If steps is true, every elementary row operation performed during the row reduction 
-     *   process will be output to the user.
+     *   process will be described and output to the user.
      * 
      * @param newMatrix       The matrix copied from the original matrix. Will be altered.
      * @param startRow        The index of the row to start from. The pivot row.
