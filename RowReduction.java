@@ -45,7 +45,8 @@ public class RowReduction {
     
     /**
      * This method returns the reciprocal of an element. If element is "0", or the numerator of
-     * element is '0' then "0" is returned.
+     * element is '0' then "0" is returned. Does not return whole numbers if the parameter numerator
+     * is 1. Instead, the fraction version is returned (1/5 does not return 5, instead returns 5/1).
      * 
      * @param element     The element for which a reciprocal is returned.
      * @return reciprocal The multiplicative inverse of the element.
@@ -134,7 +135,7 @@ public class RowReduction {
         }
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length; ++i) {
-            if (i != startRow && !newMatrix[i][col].equals("0")) {
+            if (i != startRow && !newMatrix[i][col].equals("0") && !firstNonzeroRow) {
                 String negativeElement;
                 if (newMatrix[i][col].contains("-")) {
                     negativeElement = newMatrix[i][col].replace("-", "");
