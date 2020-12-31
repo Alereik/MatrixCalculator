@@ -21,7 +21,7 @@ public class RowReduction {
      * @param row1            A row involved in an elementary row operation.
      * @param row2            A possible second row that may be involved in an elementary row 
      *                        operation, depending on which operation is being conducted.
-     * @param scalar          The scalar a row is scaled by if the operation calls for a scalar.
+     * @param scalar          The scalar that a row is scaled by if the operation calls for it.
      */
     public static void showSteps(String[][] newMatrix, int leftMatrixWidth, String operation, 
                                  int row1, int row2, String scalar) {
@@ -89,10 +89,10 @@ public class RowReduction {
      *    the rowToBePivot variable so that row may be swapped into the pivot row (startRow).
      * 2) The first zero element in the column is scaled to 1 by scalar multiplication with its 
      *    reciprocal (if it is not already at 1).
-     * 3) The first non zero row found is swapped with the starting row to become the pivot row.
+     * 3) The first non zero row found is swapped with the starting row to become the pivot row (if
+     *    it is not already at the starting row).
      * 4) The pivot row is scaled to the negative of all other non zero values in the column and 
-     *    is then added to those rows so that the pivot row has the only non zero value remaining in 
-     *    that column.
+     *    is then added to those rows until it is the only non zero value remaining in that column.
      * 5) If no non zero value is found from the starting row index to the end of the column, then 
      *    the method returns null to indicate that no row operations took place.
      *    
@@ -110,11 +110,9 @@ public class RowReduction {
     public static String[][] rowReductionInColumn(String[][] newMatrix, int startRow, int col, 
                                                   int leftMatrixWidth, boolean steps) {
         boolean firstNonzeroRow = true;
-        int rowToBePivot = startRow;
         for (int i = startRow; i < newMatrix.length && firstNonzeroRow; ++i) {
             //record first non zero row for later swapping to pivot row
             if (!newMatrix[i][col].equals("0")) {
-                rowToBePivot = i;
                 firstNonzeroRow = false;
             }
             //scale the first non zero row to 1 if not already at 1
@@ -124,15 +122,16 @@ public class RowReduction {
                 if (steps) {
                     showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
                 }
-            }           
-        }
-        //swap first non zero row to pivot row
-        if (startRow != rowToBePivot) {
-            newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
-            if (steps) {
-                showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
+            }    
+            //swap first non zero row to pivot row
+            if (startRow != i) {
+                newMatrix = RowOperations.swapRows(newMatrix, startRow, i);
+                if (steps) {
+                    showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
+                }
             }
         }
+
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length && !firstNonzeroRow; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {

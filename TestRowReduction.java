@@ -59,6 +59,15 @@ public class TestRowReduction {
 
             }
         }
+        {//test 5: parameter numerator of one
+            String element = "1/5";
+            String expected = "5/1";
+            String actual = RowReduction.getReciprocal(element);
+            if (!expected.equals(actual)) {
+                System.out.println("testGetReciprocal: Test 5 failed");
+
+            }
+        }
         if (allPassed) {
             System.out.println("All testGetReciprocal tests passed");
         }
@@ -77,7 +86,7 @@ public class TestRowReduction {
             boolean steps = false;
             String[][] expected = new String[][] {{"1", "0", "15"}, 
                                                   {"0", "1/2", "3"}, 
-                                                  {"0", "2", "-29/2"}};
+                                                  {"0", "4", "-29"}};
             String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0, leftMatrixWidth, 
                                                                   steps);
             if (!Arrays.deepEquals(expected, actual)) {
@@ -106,8 +115,8 @@ public class TestRowReduction {
                                                 {"2", "-2", "-1", "3"}, 
                                                 {"-1", "1", "4", "0"}};
             String[][] expected = new String[][] {{"1", "-1", "-1", "2"}, 
-                                                  {"0", "0", "1/2", "-1/2"}, 
-                                                  {"0", "0", "-3", "-2"}};
+                                                  {"0", "0", "1", "-1"}, 
+                                                  {"0", "0", "3", "2"}};
             int leftMatrixWidth = matrix[0].length;
             boolean steps = false; 
             String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0, leftMatrixWidth, 
