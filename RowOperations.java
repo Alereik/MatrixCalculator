@@ -233,16 +233,14 @@ public class RowOperations {
     public static String[][] swapRows(String[][] matrix, int row1, int row2) {
         String[][] newMatrix = new String[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                if (i == row1) {
-                    newMatrix[i][j] = matrix[row2][j];
-                }
-                else if (i == row2) {
-                    newMatrix[i][j] = matrix[row1][j];
-                }
-                else {
-                    newMatrix[i][j] = matrix[i][j];
-                }
+            if (i == row1) {
+                newMatrix[i] = matrix[row2];
+            }
+            else if (i == row2) {
+                newMatrix[i] = matrix[row1];
+            }
+            else {
+                newMatrix[i] = matrix[i];
             }
         }
         return newMatrix;
