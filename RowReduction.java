@@ -87,8 +87,8 @@ public class RowReduction {
      * in a specified column. 
      * 1) If a row element that is not "0" is found, the first row with such an element is saved to
      *    the rowToBePivot variable so that row may be swapped into the pivot row (startRow).
-     * 2) All non zero elements in the column  are scaled to 1 by scalar multiplication with their 
-     *    reciprocals.
+     * 2) The first zero element in the column is scaled to 1 by scalar multiplication with its 
+     *    reciprocal (if it is not already at 1).
      * 3) The first non zero row found is swapped with the starting row to become the pivot row.
      * 4) The pivot row is scaled to the negative of all other non zero values in the column and 
      *    is then added to those rows so that the pivot row has the only non zero value remaining in 
@@ -111,13 +111,13 @@ public class RowReduction {
                                                   int leftMatrixWidth, boolean steps) {
         boolean firstNonzeroRow = true;
         int rowToBePivot = startRow;
-        for (int i = startRow; i < newMatrix.length; ++i) {
+        for (int i = startRow; i < newMatrix.length && firstNonzeroRow; ++i) {
             //record first non zero row for later swapping to pivot row
-            if (!newMatrix[i][col].equals("0") && firstNonzeroRow) {
+            if (!newMatrix[i][col].equals("0")) {
                 rowToBePivot = i;
                 firstNonzeroRow = false;
             }
-            //scale all non zero rows to 1 if not already at 1
+            //scale the first non zero row to 1 if not already at 1
             if (!newMatrix[i][col].equals("0") && !newMatrix[i][col].equals("1")) {
                 String reciprocal = getReciprocal(newMatrix[i][col]);
                 newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
