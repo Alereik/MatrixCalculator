@@ -49,7 +49,9 @@ public class RowReduction {
     public static String getReciprocal(String element) {
         final int NUMERATOR = 0;
         final int DENOMINATOR = 1;
-        if (element.equals("0")) return "0";
+        if (element.equals("0")) {
+            return "0";
+        }
         //check if element is negative
         boolean isNegative = element.contains("-") ? true : false;
         int[] splitFraction;
@@ -57,7 +59,9 @@ public class RowReduction {
         //split into array if fraction
         if (element.contains("/")) {
             splitFraction = RowOperations.splitFraction(element);
-            if (splitFraction[NUMERATOR] == 0) return "0";
+            if (splitFraction[NUMERATOR] == 0) {
+                return "0";
+            }
             int tempVal = splitFraction[NUMERATOR];
             splitFraction[NUMERATOR] = splitFraction[DENOMINATOR];
             splitFraction[DENOMINATOR] = tempVal;
@@ -112,12 +116,16 @@ public class RowReduction {
             if (!newMatrix[i][col].equals("0") && !newMatrix[i][col].equals("1")) {
                 String reciprocal = getReciprocal(newMatrix[i][col]);
                 newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
-                if (steps) showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
+                if (steps) {
+                    showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
+                }
             }           
         }
         //swap first non zero row to pivot row
         newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
-        if (steps) showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
+        if (steps) {
+            showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
+        }
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {
@@ -129,8 +137,10 @@ public class RowReduction {
                     negativeElement = "-" + newMatrix[i][col];
                 }
                 newMatrix = RowOperations.addScaledRow(newMatrix, i, startRow, negativeElement);
-                if (steps) showSteps(newMatrix, leftMatrixWidth, "addScaled", startRow, i, 
-                                     negativeElement);
+                if (steps) {
+                    showSteps(newMatrix, leftMatrixWidth, "addScaled", startRow, i,
+                              negativeElement);                
+                }                     
             }
         }
         if (firstNonzeroRow) return null;
@@ -161,7 +171,9 @@ public class RowReduction {
                 newMatrix[i][j] = matrix[i][j];
             }
         }
-        if (steps) MatrixString.printMatrix(newMatrix, leftMatrixWidth);
+        if (steps) {
+            MatrixString.printMatrix(newMatrix, leftMatrixWidth);
+        }
         //iteration by both row and column
         for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {            
             String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth, steps);
