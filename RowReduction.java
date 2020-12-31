@@ -114,15 +114,15 @@ public class RowReduction {
             //record first non zero row for later swapping to pivot row
             if (!newMatrix[i][col].equals("0")) {
                 firstNonzeroRow = false;
-            }
-            //scale the first non zero row to 1 if not already at 1
-            if (!newMatrix[i][col].equals("0") && !newMatrix[i][col].equals("1")) {
-                String reciprocal = getReciprocal(newMatrix[i][col]);
-                newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
-                if (steps) {
-                    showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
+                //scale the first non zero row to 1 if not already at 1
+                if (!newMatrix[i][col].equals("1")) {
+                    String reciprocal = getReciprocal(newMatrix[i][col]);
+                    newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
+                    if (steps) {
+                        showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
+                    }
                 }
-            }    
+            }   
             //swap first non zero row to pivot row
             if (startRow != i) {
                 newMatrix = RowOperations.swapRows(newMatrix, startRow, i);
@@ -131,7 +131,6 @@ public class RowReduction {
                 }
             }
         }
-
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length && !firstNonzeroRow; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {
@@ -149,7 +148,9 @@ public class RowReduction {
                 }                     
             }
         }
-        if (firstNonzeroRow) return null;
+        if (firstNonzeroRow) {
+            return null;
+        }
         return newMatrix;
     } 
     
