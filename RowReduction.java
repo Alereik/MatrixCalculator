@@ -124,14 +124,14 @@ public class RowReduction {
                         showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
                     }
                 }
-            }   
-            //swap first non zero row to pivot row
-            if (startRow != i) {
-                newMatrix = RowOperations.swapRows(newMatrix, startRow, i);
-                if (steps) {
-                    showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
+                //swap first non zero row to pivot row
+                if (startRow != i) {
+                    newMatrix = RowOperations.swapRows(newMatrix, startRow, i);
+                    if (steps) {
+                        showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
+                    }
                 }
-            }
+            }   
         }
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length && !firstNonzeroRow; ++i) {
