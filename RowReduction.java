@@ -133,8 +133,11 @@ public class RowReduction {
                 }
             }   
         }
+        if (firstNonzeroRow) {
+            return null;
+        }
         //subtract multiple of first non zero row from all other non zero rows
-        for (int i = 0; i < newMatrix.length && !firstNonzeroRow; ++i) {
+        for (int i = 0; i < newMatrix.length; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {
                 String negativeElement;
                 if (newMatrix[i][col].contains("-")) {
@@ -149,9 +152,6 @@ public class RowReduction {
                               negativeElement);                
                 }                     
             }
-        }
-        if (firstNonzeroRow) {
-            return null;
         }
         return newMatrix;
     } 
