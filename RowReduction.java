@@ -45,7 +45,7 @@ public class RowReduction {
     
     /**
      * This method returns the reciprocal of an element. If element is "0", or the numerator of
-     * element is '0' then "0" is returned. Does not return whole numbers if the parameter numerator
+     * element is 0, then "0" is returned. Does not return whole numbers if the parameter numerator
      * is 1. Instead, the fraction version is returned (1/5 does not return 5, instead returns 5/1).
      * 
      * @param element     The element for which a reciprocal is returned.
@@ -86,26 +86,26 @@ public class RowReduction {
      * This method performs row operations along a column of a matrix, starting at a specified row
      * in a specified column. 
      * 1) If a row element that is not "0" is found, firstNonzeroRow is set to false in order to 
-     *    prevent further iterations of the for loop that searches for the first non zero row. This 
-     *    element in the first non zero row is then multiplied by its reciprocal in order to scale 
-     *    it to 1.
-     * 2) The first zero element in the column is scaled to 1 by scalar multiplication with its 
+     *    prevent further iterations of the for loop that searches for the first non zero row.
+     * 2) The first non zero element in the column is scaled to 1 by scalar multiplication with its 
      *    reciprocal (if it is not already at 1).
-     * 3) The first non zero row found is swapped with the starting row to become the pivot row (if
-     *    it is not already at the starting row).
+     * 3) The first non zero row is swapped with the starting row to become the pivot row (if it is 
+     *    not already at the starting row).
      * 4) The pivot row is scaled to the negative of all other non zero values in the column and 
      *    is then added to those rows until it is the only non zero value remaining in that column.
-     * 5) If no non zero value is found from the starting row index to the end of the column, then 
-     *    the method returns null to indicate that no row operations took place.
      *    
-     * - If steps is true, all steps in the row reduction process will be output to the user.
+     * - If no non zero value is found from the starting row index to the end of the column, then 
+     *   the method returns null to indicate that no row operations took place.
+     *       
+     * - If steps is true, every elementary row operation performed during the row reduction 
+     *   process will be output to the user.
      * 
      * @param newMatrix       The matrix copied from the original matrix. Will be altered.
      * @param startRow        The index of the row to start from. The pivot row.
      * @param col             The column containing the elements that will dictate row operations.
      * @param leftMatrixWidth The number of columns the row reduction process will be performed in.
-     *                        This parameter is used only to pass along to the showSteps method if
-     *                        that method is called.
+     *                        This parameter is only meant to be passed along for use in the 
+     *                        showSteps method when steps is true.
      * @param steps           Calls the showSteps method after every row operation if true.
      * @return newMatrix      The altered parameter matrix.
      */
@@ -158,10 +158,10 @@ public class RowReduction {
     
     /**
      * This method copies the original matrix into a newMatrix that row reduction will be
-     * performed on to reduce the matrix to Reduced Row Echelon Form (RREF). It calls the 
-     * rowReductionInColumn method to conduct the row reduction by incrementing column and rows. If
-     * no row operations took place as indicated by a null return of rowReductionInColumn, then the
-     * row is not incremented while the column continues to be.
+     * performed on in order to reduce the matrix to Reduced Row Echelon Form (RREF). It calls the 
+     * rowReductionInColumn method to conduct the row reduction and then increments the specified 
+     * column and starting row. If no row operations took place (as indicated by a null return of 
+     * rowReductionInColumn), then the row is not incremented for the next iteration.
      * 
      * @param matrix          The original matrix/augmented matrix input by the user.
      * @param leftMatrixWidth The width of the portion of the matrix to be row reduced. In an 
