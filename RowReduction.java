@@ -85,8 +85,10 @@ public class RowReduction {
     /**
      * This method performs row operations along a column of a matrix, starting at a specified row
      * in a specified column. 
-     * 1) If a row element that is not "0" is found, the first row with such an element is saved to
-     *    the rowToBePivot variable so that row may be swapped into the pivot row (startRow).
+     * 1) If a row element that is not "0" is found, firstNonzeroRow is set to false in order to 
+     *    prevent further iterations of the for loop that searches for the first non zero row. This 
+     *    element in the first non zero row is then multiplied by its reciprocal in order to scale 
+     *    it to 1.
      * 2) The first zero element in the column is scaled to 1 by scalar multiplication with its 
      *    reciprocal (if it is not already at 1).
      * 3) The first non zero row found is swapped with the starting row to become the pivot row (if
