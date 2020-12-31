@@ -27,6 +27,10 @@ public class RowReduction {
                                  int row1, int row2, String scalar) {
         ++row1;
         ++row2;
+        //if denominator of scalar is one, turn scalar into whole number
+        if (scalar != null && scalar.endsWith("/1")) {
+            scalar = scalar.substring(0, scalar.indexOf("/"));
+        }
         if (operation.equals("scale")) {
             System.out.println("Scale row" + row1 + " by " + scalar);
         }
@@ -122,9 +126,11 @@ public class RowReduction {
             }           
         }
         //swap first non zero row to pivot row
-        newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
-        if (steps) {
-            showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
+        if (startRow != rowToBePivot) {
+            newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
+            if (steps) {
+                showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
+            }
         }
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length; ++i) {
