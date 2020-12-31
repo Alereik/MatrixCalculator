@@ -10,6 +10,36 @@ package MatrixCalculator;
 public class RowReduction {
     
     /**
+     * This method outputs each step in the row reduction process to the user if the user sets the
+     * boolean parameter 'steps' to be true. row numbers are incremented to their vernacular 
+     * numbering convention rather than the number of their index (Row1 is at index 0, Row2 is at
+     * index 1, etc.).
+     * 
+     * @param newMatrix       The matrix being row operations are being conducted on.
+     * @param leftMatrixWidth The number of columns that will be converted to RREF.
+     * @param operation       The type of row operation being conducted.
+     * @param row1            A row involved in an elementary row operation.
+     * @param row2            A possible second row that may be involved in an elementary row 
+     *                        operation, depending on which operation is being conducted.
+     * @param scalar          The scalar a row is scaled by if the operation calls for a scalar.
+     */
+    public static void showSteps(String[][] newMatrix, int leftMatrixWidth, String operation, 
+                                 int row1, int row2, String scalar) {
+        ++row1;
+        ++row2;
+        if (operation.equals("scale")) {
+            System.out.println("Scale row" + row1 + " by " + scalar);
+        }
+        else if (operation.equals("addScaled")) {
+            System.out.println("Add " + scalar + " times Row" + row1 + " to Row" + row2);
+        }
+        else {
+            System.out.println("Swap Row" + row1 + " and Row" + row2);
+        }
+        MatrixString.printMatrix(newMatrix, leftMatrixWidth);
+    }
+    
+    /**
      * This method returns the reciprocal of an element. If element is "0", or the numerator of
      * element is '0' then "0" is returned.
      * 
@@ -56,14 +86,20 @@ public class RowReduction {
      *    that column.
      * 5) If no non zero value is found from the starting row index to the end of the column, then 
      *    the method returns null to indicate that no row operations took place.
+     *    
+     * - If steps is true, all steps in the row reduction process will be output to the user.
      * 
-     * @param newMatrix      The matrix copied from the original matrix. Will be altered.
-     * @param startRow       The index of the row to start from. The pivot row.
-     * @param col            The column containing the elements that will dictate row operations.
-     * @return newMatrix     The altered parameter matrix.
+     * @param newMatrix       The matrix copied from the original matrix. Will be altered.
+     * @param startRow        The index of the row to start from. The pivot row.
+     * @param col             The column containing the elements that will dictate row operations.
+     * @param leftMatrixWidth The number of columns the row reduction process will be performed in.
+     *                        This parameter is used only to pass along to the showSteps method if
+     *                        that method is called.
+     * @param steps           Calls the showSteps method after every row operation if true.
+     * @return newMatrix      The altered parameter matrix.
      */
-    public static String[][] rowReductionInColumn(String[][] newMatrix, int startRow, int col) {
-        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
+    public static String[][] rowReductionInColumn(String[][] newMatrix, int startRow, int col, 
+                                                  int leftMatrixWidth, boolean steps) {
         boolean firstNonzeroRow = true;
         int rowToBePivot = startRow;
         for (int i = startRow; i < newMatrix.length; ++i) {
@@ -76,12 +112,12 @@ public class RowReduction {
             if (!newMatrix[i][col].equals("0") && !newMatrix[i][col].equals("1")) {
                 String reciprocal = getReciprocal(newMatrix[i][col]);
                 newMatrix[i] = RowOperations.scaleRow(newMatrix, i, reciprocal);
-                //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////
+                if (steps) showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
             }           
         }
         //swap first non zero row to pivot row
         newMatrix = RowOperations.swapRows(newMatrix, startRow, rowToBePivot);
-        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
+        if (steps) showSteps(newMatrix, leftMatrixWidth, "swap", startRow, rowToBePivot, null);
         //subtract multiple of first non zero row from all other non zero rows
         for (int i = 0; i < newMatrix.length; ++i) {
             if (i != startRow && !newMatrix[i][col].equals("0")) {
@@ -93,11 +129,11 @@ public class RowReduction {
                     negativeElement = "-" + newMatrix[i][col];
                 }
                 newMatrix = RowOperations.addScaledRow(newMatrix, i, startRow, negativeElement);
-                //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////
+                if (steps) showSteps(newMatrix, leftMatrixWidth, "addScaled", startRow, i, 
+                                     negativeElement);
             }
         }
         if (firstNonzeroRow) return null;
-        //System.out.println(MatrixString.getMatrixString(newMatrix));//////////////////////////////
         return newMatrix;
     } 
     
@@ -111,10 +147,13 @@ public class RowReduction {
      * @param matrix          The original matrix/augmented matrix input by the user.
      * @param leftMatrixWidth The width of the portion of the matrix to be row reduced. In an 
      *                        augmented matrix, it is the matrix left of the augmentation border. In
-     *                        a regular matrix, it is the width of the matrix itself.
+     *                        a regular, non augmented matrix, it is the width of the matrix itself.
+     * @param steps           Shows the matrix before row reduction if true, and also is passed on 
+     *                        to the rowReductionInColumn method so that each row operation is 
+     *                        output to the used.
      * @return newMatrix      The copy of the original matrix that is row reduced to RREF.
      */
-    public static String[][] rowReduce(String[][] matrix, int leftMatrixWidth) {
+    public static String[][] rowReduce(String[][] matrix, int leftMatrixWidth, boolean steps) {
         String[][] newMatrix = new String[matrix.length][matrix[0].length];
         //copy matrix into newMatrix
         for (int i = 0; i < matrix.length; ++i) {
@@ -122,9 +161,10 @@ public class RowReduction {
                 newMatrix[i][j] = matrix[i][j];
             }
         }
+        if (steps) MatrixString.printMatrix(newMatrix, leftMatrixWidth);
         //iteration by both row and column
         for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {            
-            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j);
+            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth, steps);
             //row does not increment if non zero value not found in last iteration
             if (tempMatrix == null) {
                 --i;
@@ -134,7 +174,6 @@ public class RowReduction {
                 newMatrix = tempMatrix;
             }
         }
-        MatrixString.printMatrix(newMatrix, leftMatrixWidth);
         return newMatrix;
     }
 }

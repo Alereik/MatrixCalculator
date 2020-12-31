@@ -73,10 +73,13 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"0", "1/2", "3"}, 
                                                 {"1/3", "0", "5"}, 
                                                 {"2", "4", "1"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;
             String[][] expected = new String[][] {{"1", "0", "15"}, 
                                                   {"0", "1/2", "3"}, 
                                                   {"0", "2", "-29/2"}};
-            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0);
+            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0, leftMatrixWidth, 
+                                                                  steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReductionInColumn: Test 1 failed");
                 allPassed = false;
@@ -86,10 +89,13 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "2", "3", "1"}, 
                                                 {"1", "1", "2", "1"}, 
                                                 {"1", "2", "3", "1"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;
             String[][] expected = new String[][] {{"1", "2", "3", "1"}, 
                                                   {"0", "-1", "-1", "0"}, 
                                                   {"0", "0", "0", "0"}};
-            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0);
+            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0, leftMatrixWidth, 
+                                                                  steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReductionInColumn: Test 2 failed");
                 allPassed = false;
@@ -102,7 +108,10 @@ public class TestRowReduction {
             String[][] expected = new String[][] {{"1", "-1", "-1", "2"}, 
                                                   {"0", "0", "1/2", "-1/2"}, 
                                                   {"0", "0", "-3", "-2"}};
-            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0);
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false; 
+            String[][] actual = RowReduction.rowReductionInColumn(matrix, 0, 0, leftMatrixWidth, 
+                                                                  steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReductionInColumn: Test 3 failed");
                 allPassed = false;
@@ -122,10 +131,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"0", "1/2", "3"}, 
                                                 {"1/3", "0", "5"}, 
                                                 {"2", "4", "1"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;                                                 
             String[][] expected = new String[][] {{"1", "0", "0"}, 
                                                   {"0", "1", "0"}, 
                                                   {"0", "0", "1"}};
-            String[][] actual = RowReduction.rowReduce(matrix, matrix[0].length);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 1 failed");
                 allPassed = false;
@@ -135,10 +146,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "2", "3", "1"}, 
                                                 {"1", "1", "2", "1"}, 
                                                 {"1", "2", "3", "1"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;                                                 
             String[][] expected = new String[][] {{"1", "0", "1", "1"}, 
                                                   {"0", "1", "1", "0"}, 
                                                   {"0", "0", "0", "0"}};
-            String[][] actual = RowReduction.rowReduce(matrix, matrix[0].length);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 2 failed");
                 allPassed = false;
@@ -148,10 +161,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "-1", "-1", "2"}, 
                                                 {"2", "-2", "-1", "3"}, 
                                                 {"-1", "1", "4", "0"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;
             String[][] expected = new String[][] {{"1", "-1", "0", "0"}, 
                                                   {"0", "0", "1", "0"}, 
                                                   {"0", "0", "0", "1"}};
-            String[][] actual = RowReduction.rowReduce(matrix, matrix[0].length);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 3 failed");
                 allPassed = false;
@@ -163,12 +178,14 @@ public class TestRowReduction {
                                                 {"-1", "1", "4"},
                                                 {"4", "1", "2"},
                                                 {"3", "3", "2"}};
+            int leftMatrixWidth = matrix[0].length;
+            boolean steps = false;                                                
             String[][] expected = new String[][] {{"1", "0", "0"}, 
                                                   {"0", "1", "0"}, 
                                                   {"0", "0", "1"},
                                                   {"0", "0", "0"},
                                                   {"0", "0", "0"}};
-            String[][] actual = RowReduction.rowReduce(matrix, matrix[0].length);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 4 failed");
                 allPassed = false;
@@ -178,10 +195,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "2", "3", "6"}, 
                                                 {"2", "-3", "2","14"}, 
                                                 {"3", "1", "-1", "-2"}};
+            int leftMatrixWidth = 3;
+            boolean steps = false;  
             String[][] expected = new String[][] {{"1", "0", "0", "1"}, 
                                                   {"0", "1", "0", "-2"}, 
                                                   {"0", "0", "1", "3"}};
-            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 5 failed");
                 allPassed = false;
@@ -191,10 +210,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "1", "1", "1","0", "0"}, 
                                                 {"0", "2", "3","0","1", "0"}, 
                                                 {"5", "5", "1", "0","0", "1"}};
+            int leftMatrixWidth = 3;
+            boolean steps = false;  
             String[][] expected = new String[][] {{"1", "0", "0", "13/8","-1/2", "-1/8"}, 
                                                   {"0", "1", "0", "-15/8","1/2", "3/8"}, 
                                                   {"0", "0", "1", "5/4","0", "-1/4"}};
-            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 6 failed");
                 allPassed = false;
@@ -204,10 +225,12 @@ public class TestRowReduction {
             String[][] matrix = new String[][] {{"1", "-1", "3"}, 
                                                 {"1", "3", "-3"}, 
                                                 {"5", "3", "3"}};
+            int leftMatrixWidth = 3;
+            boolean steps = false;                                      
             String[][] expected = new String[][] {{"1", "0", "3/2"}, 
                                                   {"0", "1", "-3/2"}, 
                                                   {"0", "0", "0"}};
-            String[][] actual = RowReduction.rowReduce(matrix, 3);
+            String[][] actual = RowReduction.rowReduce(matrix, leftMatrixWidth, steps);
             if (!Arrays.deepEquals(expected, actual)) {
                 System.out.println("testRowReduce: Test 7 failed");
                 allPassed = false;
