@@ -221,29 +221,13 @@ public class ElementOperator {
             || element.equals("/") || element.endsWith("-")) {
             return false;
         }
-        else if (element.contains("/")) {//ensure content exists on both sides of '/'
-            String numerator = element.substring(0, element.indexOf('/'));
-            String denominator = element.substring(element.indexOf('/'), element.length() - 1);
-            if (numerator.length() == 0 || denominator.length() == 0) {
-                return false;
-            }//ensure content on both sides of '/' consists of only integers
-            for (int i = 0; i < element.length(); ++i) {                
-                if (element.charAt(i) != '/' && element.charAt(i) != '-' 
-                    && !Character.isDigit(element.charAt(i))) {
-                    return false;
-                }
-            }
-        }
-        else {//ensure non fractions only contain numbers and '-'
-            for (int i = 0; i < element.length(); ++i) {
-                if (element.charAt(i) != '-' && !Character.isDigit(element.charAt(i))) {
-                    return false;
-                }
-            }
-        }//check for more than one '-' or '/', and check if a '-' immediately follows a number
         for (int i = 0, dashCount = 0, slashCount = 0; i < element.length(); ++i) {
+            if (element.charAt(i) != '-' && element.charAt(i) != '/' 
+                && !Character.isDigit(element.charAt(i))) {//check for non numbers
+                return false;
+            }
             if (i < element.length() - 1 && Character.isDigit(element.charAt(i)) 
-                && element.charAt(i + 1) == '-') {
+                && element.charAt(i + 1) == '-') {//check if '-' is after a number
                 return false;
             }
             if (element.charAt(i) == '-') {
@@ -252,8 +236,22 @@ public class ElementOperator {
             if (element.charAt(i) == '/') {
                 ++slashCount;
             }
-            if (dashCount > 1 || slashCount > 1) {
+            if (dashCount > 1 || slashCount > 1) {//check for more than one '-' or '/'
                 return false;
+            }
+        }
+        if (element.contains("/")) {//ensure valid content exists on both sides of '/'
+            String numerator = element.substring(0, element.indexOf('/'));
+            String denominator = element.substring(element.indexOf('/') + 1, element.length());
+            if (numerator.length() == 0 || denominator.length() == 0 || numerator.equals("-")
+                || Integer.parseInt(denominator) == 0) {
+                return false;
+            }//ensure content on both sides of '/' consists of only integers
+            for (int i = 0; i < element.length(); ++i) {                
+                if (element.charAt(i) != '/' && element.charAt(i) != '-' 
+                    && !Character.isDigit(element.charAt(i))) {
+                    return false;
+                }
             }
         }
         return true;
