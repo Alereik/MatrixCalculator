@@ -32,24 +32,19 @@ public class MatrixStringBuilder {
         for (int i = 0; i < matrix.length; ++i) {
             int difference = 0;
             for (int j = 0; j < matrix[i].length; ++j) {
-                String padLeft = "";
-                String padRight = "";
+                String padLeft = " ";
+                String padRight = " ";
                 difference = greatestLength - matrix[i][j].length();
                 //even number of spaces to pad element
                 if (difference % 2 == 0) {
-                    for (int k = 0; k < difference / 2; ++k) {
-                        padLeft += " ";
-                        padRight += " ";
-                    }
+                    padLeft += padLeft.repeat(difference / 2);
+                    padRight += padRight.repeat(difference / 2);
                     equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
                 }
                 //odd number of spaces to pad element puts one more padding space on right side
                 else {
-                    for (int k = 0; k < difference / 2; ++k) {
-                        padLeft += " ";
-                        padRight += " ";
-                    }
-                    padRight += " ";
+                    padLeft += padLeft.repeat(difference / 2);
+                    padRight += padRight.repeat((difference / 2) + 1);
                     equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
                 }
             }
@@ -77,9 +72,7 @@ public class MatrixStringBuilder {
             matrixWidth += "  ";
         }
         //concatenate spaces, elementWidth times
-        for (int i = 0; i < elementWidth; ++i) {
-            matrixWidth += " ";
-        }
+        matrixWidth += " ".repeat(elementWidth);
         return matrixWidth;
     }
     /**

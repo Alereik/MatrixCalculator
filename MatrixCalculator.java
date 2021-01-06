@@ -10,7 +10,9 @@ public class MatrixCalculator {
         Matrix matrix = new Matrix();
         matrix.getUpperTriangularForm();
         matrix.getDeterminant();
-        matrix.getAdjoint();
+        matrix.getRowReducedInverse();
+        matrix.getAdjointInverse();
+        matrix.getRREF();
         input.close();
     }
 }

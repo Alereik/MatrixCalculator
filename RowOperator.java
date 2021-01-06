@@ -184,9 +184,6 @@ public class RowOperator extends ElementOperator{
      *    
      * - If no non zero value is found from the starting row index to the end of the column, then 
      *   the method returns null to indicate that no row operations took place.
-     *       
-     * - If steps is true, every elementary row operation performed during the row reduction 
-     *   process will be described and output to the user.
      * 
      * @param newMatrix       The matrix copied from the original matrix. Will be altered.
      * @param startRow        The index of the row to start from. The pivot row.
@@ -194,11 +191,10 @@ public class RowOperator extends ElementOperator{
      * @param leftMatrixWidth The number of columns the row reduction process will be performed in.
      *                        This parameter is only meant to be passed along for use in the 
      *                        showSteps method when steps is true.
-     * @param steps           Calls the showSteps method after every row operation if true.
      * @return newMatrix      The altered parameter matrix.
      */
     private String[][] rowReductionInColumn(String[][] newMatrix, int startRow, int col, 
-                                                  int leftMatrixWidth, boolean steps) {
+                                                  int leftMatrixWidth) {
         boolean firstNonzeroRow = true;
         for (int i = startRow; i < newMatrix.length && firstNonzeroRow; ++i) {
             //record first non zero row for later swapping to pivot row
@@ -208,16 +204,12 @@ public class RowOperator extends ElementOperator{
                 if (!newMatrix[i][col].equals("1")) {
                     String reciprocal = getReciprocal(newMatrix[i][col]);
                     newMatrix[i] = scaleRow(newMatrix, i, reciprocal);
-                    if (steps) {
-                        showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
-                    }
+                    showSteps(newMatrix, leftMatrixWidth, "scale", i, 0, reciprocal);
                 }
                 //swap first non zero row to pivot row
                 if (startRow != i) {
                     newMatrix = swapRows(newMatrix, startRow, i);
-                    if (steps) {
-                        showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
-                    }
+                    showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
                 }
             }   
         }
@@ -235,10 +227,7 @@ public class RowOperator extends ElementOperator{
                     negativeElement = "-" + newMatrix[i][col];
                 }
                 newMatrix = addScaledRow(newMatrix, i, startRow, negativeElement);
-                if (steps) {
-                    showSteps(newMatrix, leftMatrixWidth, "addScaled", startRow, i,
-                              negativeElement);                
-                }                     
+                showSteps(newMatrix, leftMatrixWidth, "addScaled", startRow, i, negativeElement);                    
             }
         }
         return newMatrix;
@@ -255,12 +244,9 @@ public class RowOperator extends ElementOperator{
      * @param leftMatrixWidth The width of the portion of the matrix to be row reduced. In an 
      *                        augmented matrix, it is the matrix left of the augmentation border. In
      *                        a regular, non augmented matrix, it is the width of the matrix itself.
-     * @param steps           Shows the matrix before row reduction if true, and also is passed on 
-     *                        to the rowReductionInColumn method so that each row operation is 
-     *                        output to the used.
      * @return newMatrix      The copy of the original matrix that is row reduced to RREF.
      */
-    public String[][] rowReduce(String[][] matrix, int leftMatrixWidth, boolean steps) {
+    public String[][] rowReduce(String[][] matrix, int leftMatrixWidth) {
         String[][] newMatrix = new String[matrix.length][matrix[0].length];
         //copy matrix into newMatrix
         for (int i = 0; i < matrix.length; ++i) {
@@ -268,12 +254,10 @@ public class RowOperator extends ElementOperator{
                 newMatrix[i][j] = matrix[i][j];
             }
         }
-        if (steps) {
-            printer.printMatrix(newMatrix, leftMatrixWidth);
-        }
+        printer.printMatrix(newMatrix, leftMatrixWidth);
         //iteration by both row and column
         for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {            
-            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth, steps);
+            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth);
             //row does not increment if non zero value not found in last iteration
             if (tempMatrix == null) {
                 --i;

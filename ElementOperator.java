@@ -207,4 +207,49 @@ public class ElementOperator {
         }
         return reciprocal;
     }
+    
+    /**
+     * Checks if a string entered by the user as an element in a vector or matrix is a valid number 
+     * entry. Valid number entries are either string literals of whole numbers such as "-1" or 
+     * "148", or string literals of fractions such as "3/4" or "-83/37".
+     * 
+     * @param element  The user entry being checked for validity.
+     * @return isValid Returns true if element is valid.
+     */
+    public boolean checkElementValidity(String element) {
+        if (element == null || element.equals("") || element.length() == 0 || element.equals("-")
+            || element.equals("/") || element.endsWith("-")) {
+            return false;
+        }
+        else if (element.contains("/")) {//ensure content exists on both sides of '/'
+            String numerator = element.substring(0, element.indexOf('/'));
+            String denominator = element.substring(element.indexOf('/'), element.length() - 1);
+            if (numerator.length() == 0 || denominator.length() == 0) {
+                return false;
+            }//ensure content on both sides of '/' consists of only integers
+            for (int i = 0; i < element.length(); ++i) {                
+                if (element.charAt(i) != '/' && element.charAt(i) != '-' 
+                    && !Character.isDigit(element.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < element.length(); ++i) {
+                if (element.charAt(i) != '-' && !Character.isDigit(element.charAt(i))) {
+                    return false;
+                }
+            }
+        }//check for more than one '-' or '/'
+        for (int i = 0, dashCount = 0, slashCount = 0; i < element.length(); ++i) {
+            if (element.charAt(i) == '-' || element.charAt(i) == '/') {
+                ++dashCount;
+                ++slashCount;
+            }
+            if (dashCount > 1 || slashCount > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

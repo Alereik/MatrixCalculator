@@ -28,45 +28,6 @@ public class Matrix{
         this.numColumns = matrix[0].length;
         this.matrix = matrix;
     }
-
-    /**
-     * Checks if a string entered by the user as an element in a vector or matrix is a valid number 
-     * entry. Valid number entries are either string literals of whole numbers such as "-1" or 
-     * "148", or string literals of fractions such as "3/4" or "-83/37".
-     * 
-     * @param element  The user entry being checked for validity.
-     * @return isValid Returns true if element is valid.
-     */
-    private boolean checkElementValidity(String element) {
-        boolean isValid = true;
-        if (element == null || element.equals("") || element.length() == 0 || element.equals("-")
-            || element.equals("/")) {
-            isValid = false;
-        }
-        else if (element.contains("/")) {
-            //ensure content exists on both sides of '/'
-            String numerator = element.substring(0, element.indexOf('/'));
-            String denominator = element.substring(element.indexOf('/'), element.length() - 1);
-            if (numerator.length() == 0 || denominator.length() == 0) {
-                isValid = false;
-            }
-            //ensure content on both sides of '/' consists of only integers
-            for (int i = 0; i < element.length(); ++i) {                
-                if (element.charAt(i) != '/' && element.charAt(i) != '-' 
-                    && !Character.isDigit(element.charAt(i))) {
-                    isValid = false;
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < element.length(); ++i) {
-                if (element.charAt(i) != '-' && !Character.isDigit(element.charAt(i))) {
-                    isValid = false;
-                }
-            }
-        }
-        return isValid;
-    }
     
     /**
      * Prompts the user to enter in the number of rows and columns that the new matrix will have. If
@@ -111,7 +72,7 @@ public class Matrix{
             for (int j = 0; j < numColumns; ++j) {
                 System.out.println("Enter the element for Row" + (i + 1) + " , Column" + (j + 1));
                 matrix[i][j] = input.nextLine().trim();
-                isValidEntry = checkElementValidity(matrix[i][j]);
+                isValidEntry = operator.checkElementValidity(matrix[i][j]);
                 if (!isValidEntry) {
                     System.out.println("Invalid: Element must be a whole number or a fraction");
                     --j;
@@ -141,49 +102,48 @@ public class Matrix{
     public int getNumColumns() {
         return numColumns;
     }
+    
+    /**
+     * Returns the matrix's two dimensional array.
+     * 
+     * @return matrix The two dimensional array housing the matrix's values.
+     */
+    public String[][] getMatrixArray() {
+        return matrix;
+    }
         
     /**
-     * Outputs the inverse of a matrix to the user if it is invertible.
+     * Outputs the inverse of a matrix, computed through row reduction, to the user . Requires a 
+     * square matrix.
      * 
      * @param matrix The matrix to be inverted if possible.
      * @param steps  Shows each row reduction step applied to the augmented matrix if true, or only 
      *               the inverse if false.
      */
-    public void getInverse(boolean steps) {
-        String[][] checkMatrix = operator.rowReduce(matrix, numRows, false);
-        //check if invertible
-        for (int k = 0; k < checkMatrix.length; ++k) {
-            if (numRows != numColumns || checkMatrix[k][k].equals("0")) {
-                System.out.println("Matrix not invertible");
-                return;
-            }
+    public void getRowReducedInverse() {
+        boolean invertible = operator.checkInvertibility(matrix);
+        if (!invertible) {
+            return;
         }
-        //augment with identity matrix
-        String[][] augmentedMatrix = new String[numRows][numColumns * 2];
-        for (int i = 0; i < augmentedMatrix.length; ++i) {
-            for (int j = 0; j < augmentedMatrix[0].length; ++j) {
-                if (j < matrix.length) {
-                    augmentedMatrix[i][j] = matrix[i][j];
-                }
-                else if ((j - matrix.length) == i) {
-                    augmentedMatrix[i][j] = "1";
-                }
-                else {
-                    augmentedMatrix[i][j] = "0";
-                }
-            }
-        }
-        augmentedMatrix = operator.rowReduce(augmentedMatrix, numColumns, steps);
-        //extract and show inverse from augmented matrix
-        String[][] inverse = new String[augmentedMatrix.length][augmentedMatrix[0].length / 2];
-        for (int i = 0; i < augmentedMatrix.length; ++i) {
-            for (int j = augmentedMatrix[0].length / 2; j < augmentedMatrix[0].length; ++j) {
-                inverse[i][j - (augmentedMatrix[0].length / 2)] = augmentedMatrix[i][j];
-            }
-        }
+        String[][] inverse = operator.getRowReducedInverse(matrix);
+        System.out.println("The inverse of this matrix is:");
         printer.printMatrix(inverse, inverse[0].length);
     }
-
+    
+    /**
+     * Outputs the inverse of the matrix, computed through the adjoint method, to the user. Requires
+     * a square matrix.
+     */
+    public void getAdjointInverse() {
+        boolean invertible = operator.checkInvertibility(matrix);
+        if (!invertible) {
+            return;
+        }
+        String[][] inverse = operator.getAdjointInverse(matrix);
+        System.out.println("The inverse of this matrix is:");
+        printer.printMatrix(inverse, numColumns);
+    }
+    
     /**
      * Outputs the Reduced Row Echelon Form of a matrix to the user, showing each step of the 
      * row reduction process.
@@ -191,23 +151,16 @@ public class Matrix{
      * @param matrix The matrix to be row reduced to RREF.
      */
     public void getRREF() {
-        operator.rowReduce(matrix, numColumns, true);
+        operator.rowReduce(matrix, numColumns);
     }
     
     /**
-     * Returns the transpose of a matrix.
+     * Outputs the transpose of a matrix.
      * 
-     * @param matrix The matrix to be transposed.
      */
-    public String[][] getTranspose() {
-        String[][] transpose = new String[numRows][numColumns];
-        for (int i = 0; i < transpose.length; ++i) {
-            for (int j = 0; j < transpose[0].length; ++j) {
-                transpose[i][j] = matrix[j][i];
-            }
-        }
+    public void getTranspose() {
+        String[][] transpose = operator.getTranspose(matrix);
         printer.printMatrix(transpose, transpose[0].length);
-        return transpose;
     }
     
     /**
@@ -222,6 +175,7 @@ public class Matrix{
             return;
         }
         String[][][] returned = operator.getUpperTriangularForm(matrix);
+        System.out.println("An upper triangular form of this matrix is:");
         printer.printMatrix(returned[0], numColumns);
     }
     
@@ -236,26 +190,22 @@ public class Matrix{
             return;            
         }
         String[][][] returned = operator.getUpperTriangularForm(matrix);
-        System.out.println("The determinant of this matrix is " + returned[1][0][0]);
+        System.out.println("The determinant of this matrix is " + returned[1][0][0] + "\n");
     }
+    
     /**
      * Outputs the adjoint of the matrix to the user. Requires a square matrix.
      */
-    public String[][] getAdjoint() {
+    public void getAdjoint() {
         if (numRows != numColumns) {
             System.out.println("Square matrix required");
-            return null;
+            return;
         }
-        String[][] cofactorMatrix = new String[numRows][numColumns];       
-        for (int i = 0; i < numRows; ++i) {
-            for (int j = 0; j < numColumns; ++j) {
-                cofactorMatrix[i][j] = operator.getCofactor(matrix, i, j);
-            }
-        }
-        Matrix transposer = new Matrix(cofactorMatrix);
-        String[][] adjoint = transposer.getTranspose();
-        return adjoint;
+        System.out.println("The adjoint of this matrix is:");
+        String[][] adjoint = operator.getAdjoint(matrix);
+        printer.printMatrix(adjoint, numColumns);
     }
+    
     //TODO
     public void getNullity() {
         
