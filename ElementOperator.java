@@ -234,16 +234,22 @@ public class ElementOperator {
                 }
             }
         }
-        else {
+        else {//ensure non fractions only contain numbers and '-'
             for (int i = 0; i < element.length(); ++i) {
                 if (element.charAt(i) != '-' && !Character.isDigit(element.charAt(i))) {
                     return false;
                 }
             }
-        }//check for more than one '-' or '/'
+        }//check for more than one '-' or '/', and check if a '-' immediately follows a number
         for (int i = 0, dashCount = 0, slashCount = 0; i < element.length(); ++i) {
-            if (element.charAt(i) == '-' || element.charAt(i) == '/') {
+            if (i < element.length() - 1 && Character.isDigit(element.charAt(i)) 
+                && element.charAt(i + 1) == '-') {
+                return false;
+            }
+            if (element.charAt(i) == '-') {
                 ++dashCount;
+            }
+            if (element.charAt(i) == '/') {
                 ++slashCount;
             }
             if (dashCount > 1 || slashCount > 1) {

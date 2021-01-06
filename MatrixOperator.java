@@ -41,7 +41,7 @@ public class MatrixOperator extends RowOperator{
      * @return cofactor The product of the minor's determinant and the computed sign. The sign is
      *                  computed as follows: (-1)^(rowNumber + columnNumber).
      */
-    public String getCofactor(String[][] matrix, int row, int column) {
+    private String getCofactor(String[][] matrix, int row, int column) {
         String[][] minor = getSubMatrix(matrix, row, column);
         ++row;//increment row and column for correct computation of sign
         ++column;
@@ -148,14 +148,14 @@ public class MatrixOperator extends RowOperator{
      */
     public boolean checkInvertibility(String[][] matrix) {
         if (matrix.length != matrix[0].length) {
-            System.out.println("Matrix not invertible");
+            System.out.println("This matrix is not invertible");
             return false;
         }
         else {//check if invertible
             String[][] checkMatrix = getUpperTriangularForm(matrix)[0];
             for (int k = 0; k < checkMatrix.length; ++k) {
                 if (matrix.length != matrix[0].length || checkMatrix[k][k].equals("0")) {
-                    System.out.println("Matrix not invertible");
+                    System.out.println("This matrix is not invertible");
                     return false;
                 }
             }
