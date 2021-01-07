@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * 
+ * Matrix objects for which linear algebra computations can be performed on and/or with.
  * 
  * @author AOsterndorff
  *
