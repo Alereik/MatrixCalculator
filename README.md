@@ -14,6 +14,9 @@ The following can be computed for a given matrix of appropriate dimensions.
   - Upper Triangular Form
   - Determinant
   - Null Space
+  - Matrix multiplication
+  - Matrix scalar multiplication
+  - Matrix addition/subtraction
 
 MatrixStringBuilder - Creates strings that visually represents matrices, augmeneted matrices, and null space displays that can be printed to the console.
 
