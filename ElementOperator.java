@@ -244,7 +244,7 @@ public class ElementOperator {
             String numerator = element.substring(0, element.indexOf('/'));
             String denominator = element.substring(element.indexOf('/') + 1, element.length());
             if (numerator.length() == 0 || denominator.length() == 0 || numerator.equals("-")
-                || Integer.parseInt(denominator) == 0) {
+                || Integer.parseInt(denominator) == 0) {//ensure no zero denominator
                 return false;
             }//ensure content on both sides of '/' consists of only integers
             for (int i = 0; i < element.length(); ++i) {                

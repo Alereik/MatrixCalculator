@@ -123,6 +123,7 @@ public class Matrix{
     public void getRowReducedInverse() {
         boolean invertible = operator.checkInvertibility(matrix);
         if (!invertible) {
+            System.out.println("This matrix is not invertible");
             return;
         }
         String[][] inverse = operator.getRowReducedInverse(matrix);
@@ -137,6 +138,7 @@ public class Matrix{
     public void getAdjointInverse() {
         boolean invertible = operator.checkInvertibility(matrix);
         if (!invertible) {
+            System.out.println("This matrix is not invertible");
             return;
         }
         String[][] inverse = operator.getAdjointInverse(matrix);
@@ -151,7 +153,7 @@ public class Matrix{
      * @param matrix The matrix to be row reduced to RREF.
      */
     public void getRREF() {
-        operator.rowReduce(matrix, numColumns);
+        operator.rowReduce(matrix, numColumns, true);
     }
     
     /**
@@ -207,8 +209,14 @@ public class Matrix{
     }
     
     //TODO
-    public void getNullity() {
-        
+    public void getNullSpace() {
+        if(operator.checkInvertibility(matrix)) {
+            System.out.println("The null space of this matrix is {0}");
+        }
+        else {
+            System.out.println("The null space of this matrix is:");
+            operator.getNullSpace(matrix);
+        }
     }
     
     /**

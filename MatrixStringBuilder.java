@@ -1,5 +1,7 @@
 package matrixCalculator;
 
+import java.util.ArrayList;
+
 /**
  * Converts a matrix into a string that represents the matrix visually and outputs the string to the
  * user.
@@ -18,31 +20,27 @@ public class MatrixStringBuilder {
      * @return equalizedMatrixArr   The new matrix array with elements of equal length.
      */
     private String[][] equalizeElementWidth(String[][] matrix) {
-        String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];
-        //find length of longest element
+        String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];        
         int greatestLength = 0;
-        for (int i = 0; i < matrix.length; ++i) {
+        for (int i = 0; i < matrix.length; ++i) {//find length of longest element
             for (int j = 0; j < matrix[i].length; ++j) {
                 if (matrix[i][j].length() > greatestLength) {
                     greatestLength = matrix[i][j].length();
                 }
             }
-        }
-        //add whitespace padding to shorter elements to match longest element
+        }//add whitespace padding to shorter elements to match longest element
         for (int i = 0; i < matrix.length; ++i) {
             int difference = 0;
             for (int j = 0; j < matrix[i].length; ++j) {
                 String padLeft = " ";
                 String padRight = " ";
-                difference = greatestLength - matrix[i][j].length();
-                //even number of spaces to pad element
-                if (difference % 2 == 0) {
+                difference = greatestLength - matrix[i][j].length();               
+                if (difference % 2 == 0) {//even number of spaces to pad element
                     padLeft += padLeft.repeat(difference / 2);
                     padRight += padRight.repeat(difference / 2);
                     equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
-                }
-                //odd number of spaces to pad element puts one more padding space on right side
-                else {
+                }          
+                else {//if odd number of spaces, put one more padding space on right side
                     padLeft += padLeft.repeat(difference / 2);
                     padRight += padRight.repeat((difference / 2) + 1);
                     equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
@@ -217,6 +215,119 @@ public class MatrixStringBuilder {
             }
             System.out.println(getAugmentedMatrixString(leftMatrix, rightMatrix));
         }
-
+    }
+    
+    /**
+     * Builds two dimensional string arrays from the Integer elements in the ArrayList freeVar, then
+     * calls the equalizeElementWidth method in order to equalize the elements lengths. The two
+     * dimensional arrays are stored in a three dimensional array.
+     * 
+     * @param set               The matrix containing the basis vectors of the null space as it's 
+     *                          columns.
+     * @param freeVar           The column indexes in which free variables were found in the reduced
+     *                          row echelon form of the original matrix.
+     * @return variablePrintArr The three dimensional array containing all resulting two dimensional
+     *                          arrays.
+     */
+    private String[][][] buildVariableArr(String[][] set, ArrayList<Integer> freeVar) {
+        String[][][] variablePrintArr = new String[freeVar.size()][set.length][1];
+        String[] variables = new String[freeVar.size()];
+        for (int i = 0; i < freeVar.size(); ++i) {//convert freeVar elements to variable names
+            variables[i] = "x" + (freeVar.get(i) + 1);
+        }
+        for (int j = 0; j < freeVar.size(); ++j) {//construct string arrays for variable names
+            for (int i = 0; i < set.length; ++i) {
+                if (i == set.length / 2) {//variable name in middle of row height
+                    if (j == 0) {
+                        variablePrintArr[j][i][0] = variables[j];
+                    }
+                    else {
+                        variablePrintArr[j][i][0] = " + " + variables[j];
+                    }
+                }
+                else {
+                    variablePrintArr[j][i][0] = " ";
+                }
+            }
+        }
+        for (int i = 0; i < variablePrintArr.length; ++i) {
+            variablePrintArr[i] = equalizeElementWidth(variablePrintArr[i]);
+        }
+        return variablePrintArr;
+    }
+    
+    /**
+     * Creates the top and bottom rows of the string representation of the null space display.
+     * 
+     * @param variablePrintArr    The array of variable label arrays.
+     * @param set                 The matrix containing the  basis vectors of the null space as it's 
+     *                            columns.
+     * @param top                 Creates the top row if true, bottom row if false.
+     * @return nullityPrintString The top or bottom row of the null space display string, depending
+     *                            on the value of the boolean parameter 'top'.
+     */
+    private String nullityBracketEnds(String[][][] variablePrintArr, String[][] set, boolean top) {
+        String nullityPrintString = "";
+        if (top) {
+            for (int j = 0, k = 0, l = 0; j < variablePrintArr.length + set[0].length; ++j) {
+                if (j % 2 == 0) {
+                    nullityPrintString += " ".repeat(variablePrintArr[k][0][0].length());
+                    ++k;
+                }
+                else {
+                    nullityPrintString += "/" + " ".repeat(set[0][l].length()) + "\\";
+                    ++l;
+                }
+            }
+        }
+        else {
+            for (int j = 0, k = 0, l = 0; j < variablePrintArr.length + set[0].length; ++j) {
+                if (j % 2 == 0) {
+                    nullityPrintString += " ".repeat(variablePrintArr[k][0][0].length());
+                    ++k;
+                }
+                else {
+                    nullityPrintString += "\\" + " ".repeat(set[0][l].length()) + "/";
+                    ++l;
+                }
+            }
+        }
+        nullityPrintString += "\n";
+        return nullityPrintString;
+    }
+    
+    /**
+     * Outputs a string representation of a null space solution display. 
+     * 1) The buildVariableArr method is called to create string arrays of the variable labels, so 
+     *    that the elements can space the null space basis vectors evenly.
+     * 2) The equalizeElementWidth method is called in order to equalize the lengths of the elements
+     *    in 'set'.
+     * 3) The nullityBracketEnds method is called to create the top row of the string.
+     * 4) The body of the null space display is constructed.
+     * 5) The nullityBracketEnds method is called to create the bottom row of the string.
+     * 
+     * @param set     The matrix containing the  basis vectors of the null space as it's columns.
+     * @param freeVar The column indexes in which free variables were found in the reduced row 
+     *                echelon form of the original matrix.
+     */
+    public void printNullSpace(String[][] set, ArrayList<Integer> freeVar) {
+        String[][][] variablePrintArr = buildVariableArr(set, freeVar);
+        set = equalizeElementWidth(set);
+        String nullityPrintString = nullityBracketEnds(variablePrintArr, set, true);
+        for (int i = 0; i < set.length; ++i) {
+            for (int j = 0, k = 0, l = 0; j < variablePrintArr.length + set[0].length; ++j) {
+                if (j % 2 == 0) {
+                    nullityPrintString += variablePrintArr[k][i][0];
+                    ++k;
+                }
+                else {
+                    nullityPrintString += "|" + set[i][l] + "|";
+                    ++l;
+                }
+            }
+            nullityPrintString += "\n";
+        }
+        nullityPrintString += nullityBracketEnds(variablePrintArr, set, false);
+        System.out.println(nullityPrintString);
     }
 }

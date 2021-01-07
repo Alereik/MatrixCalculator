@@ -1,5 +1,7 @@
 package matrixCalculator;
 
+import java.util.ArrayList;
+
 /**
  * Performs operations on matrices.
  * 
@@ -148,14 +150,12 @@ public class MatrixOperator extends RowOperator{
      */
     public boolean checkInvertibility(String[][] matrix) {
         if (matrix.length != matrix[0].length) {
-            System.out.println("This matrix is not invertible");
             return false;
         }
         else {//check if invertible
             String[][] checkMatrix = getUpperTriangularForm(matrix)[0];
             for (int k = 0; k < checkMatrix.length; ++k) {
                 if (matrix.length != matrix[0].length || checkMatrix[k][k].equals("0")) {
-                    System.out.println("This matrix is not invertible");
                     return false;
                 }
             }
@@ -178,7 +178,7 @@ public class MatrixOperator extends RowOperator{
         }
         //augment with identity matrix
         String[][] augmentedMatrix = augmentIdentity(matrix);
-        augmentedMatrix = rowReduce(augmentedMatrix, matrix[0].length);
+        augmentedMatrix = rowReduce(augmentedMatrix, matrix[0].length, true);
         //extract and show inverse from augmented matrix
         String[][] inverse = new String[augmentedMatrix.length][augmentedMatrix[0].length / 2];
         for (int i = 0; i < augmentedMatrix.length; ++i) {
@@ -208,8 +208,8 @@ public class MatrixOperator extends RowOperator{
      * Returns the adjoint of the matrix to the user. Requires a square matrix.
      */
     public String[][] getAdjoint(String[][] matrix) {
-        boolean invertible = checkInvertibility(matrix);
-        if (!invertible) {
+        if (matrix.length != matrix[0].length) {
+            System.out.println("Square matrix required");
             return null;
         }//get cofactor matrix
         String[][] cofactorMatrix = new String[matrix.length][matrix[0].length];       
@@ -232,8 +232,8 @@ public class MatrixOperator extends RowOperator{
      *    the inverse of the matrix.
      */
     public String[][] getAdjointInverse(String[][] matrix) {
-        if (matrix.length != matrix[0].length) {
-            System.out.println("Matrix not invertible");
+        boolean invertible = checkInvertibility(matrix);
+        if (!invertible) {
             return null;
         }//getUpperTriangularForm(matrix)[1][0][0] is the determinant of the original matrix
         String detReciprocal = getReciprocal(getUpperTriangularForm(matrix)[1][0][0]);
@@ -245,5 +245,51 @@ public class MatrixOperator extends RowOperator{
             }
         }
         return inverse;
+    }
+    
+    /**
+     * Returns the basis vectors of the nullity/null space of of a matrix as columns of a matrix.
+     * 1) The original matrix is row reduced to RREF.
+     * 2) The RREF matrix is checked for leading 1's, with the rows being recorded as having a free
+     *    variable in the freeVar ArrayList or not having a free variable in the dependVar 
+     *    ArrayList.
+     * 3) The null space matrix is created, with each column being a basis vector for the null 
+     *    space. The non zero elements from the columns without leading 1's are placed in the vector
+     *    in the rows of their respective variables. The free variables are then placed in the 
+     *    vectors in their respective positions. All other elements in the array are given the value
+     *    of "0".
+     * 
+     * @param matrix The matrix for which the nullity/null space of the matrix is being computed.
+     */
+    public String[][] getNullSpace(String[][] matrix) {
+        ArrayList<Integer> freeVar = new ArrayList<>();
+        ArrayList<Integer> dependVar= new ArrayList<>();
+        String[][] rowReduced = rowReduce(matrix, matrix[0].length, false);
+        for (int i = 0,j = 0; i < rowReduced.length && j < rowReduced[0].length; ++i, ++j) {
+            if (!rowReduced[i][j].equals("1")) {
+                freeVar.add(j);//record free variables in ArrayList
+                --i;
+            }
+            else {
+                dependVar.add(j);//record dependent variables in ArrayList
+            }
+        }
+        String[][] nullSpace = new String[rowReduced[0].length][freeVar.size()];
+        for (int j = 0; j < freeVar.size(); ++j) {//columns in nullSpace are the vectors of nullity
+            for (int i = 0, k = 0; i < rowReduced[0].length; ++i, ++k) {
+                if (k < dependVar.size()) {//place non zero elements from free variable columns
+                    nullSpace[dependVar.get(k)][j] = 
+                                        fractionMultiplication(rowReduced[i][freeVar.get(j)], "-1");
+                }
+                if (i == freeVar.get(j)) {//place free variables
+                    nullSpace[i][j] = "1";
+                }
+                if (nullSpace[i][j] == null) {//place "0" for all other elements
+                    nullSpace[i][j] = "0";
+                }
+            }            
+        }
+        printer.printNullSpace(nullSpace, freeVar);
+        return nullSpace;
     }
 }
