@@ -247,7 +247,7 @@ public class ElementOperator {
                 || Integer.parseInt(denominator) == 0) {//ensure no zero denominator
                 return false;
             }//ensure content on both sides of '/' consists of only integers
-            for (int i = 0; i < element.length(); ++i) {                
+            for (int i = 0; i < element.length(); ++i) {
                 if (element.charAt(i) != '/' && element.charAt(i) != '-' 
                     && !Character.isDigit(element.charAt(i))) {
                     return false;

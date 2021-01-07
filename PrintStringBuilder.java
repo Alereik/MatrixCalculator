@@ -20,7 +20,7 @@ public class PrintStringBuilder {
      * @return equalizedMatrixArr   The new matrix array with elements of equal length.
      */
     private String[][] equalizeElementlength(String[][] matrix) {
-        String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];        
+        String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];
         int greatestLength = 0;
         for (int i = 0; i < matrix.length; ++i) {//find length of longest element
             for (int j = 0; j < matrix[i].length; ++j) {
@@ -39,7 +39,7 @@ public class PrintStringBuilder {
                     padLeft += padLeft.repeat(difference / 2);
                     padRight += padRight.repeat(difference / 2);
                     equalizedMatrixArr[i][j] = padLeft + matrix[i][j] + padRight;
-                }          
+                }
                 else {//if odd number of spaces, put one more padding space on right side
                     padLeft += padLeft.repeat(difference / 2);
                     padRight += padRight.repeat((difference / 2) + 1);
@@ -94,7 +94,7 @@ public class PrintStringBuilder {
         //get width of matrix to build rows without elements
         String matrixWidth = getMatrixWidthString(equalMatrixArr);
         //generate a string representation of the matrix
-        String matrixPrintString = "/" + matrixWidth + "\\\n";        
+        String matrixPrintString = "/" + matrixWidth + "\\\n";
         for (int i = 0; i < equalMatrixArr.length; ++i) {
             matrixPrintString += "|";
             for (int j = 0; j < equalMatrixArr[i].length; ++j) {
@@ -147,7 +147,7 @@ public class PrintStringBuilder {
         String rightMatrixWidth = getMatrixWidthString(equalAugMatrix);
         String augMatrixWidth = leftMatrixWidth + "|" + rightMatrixWidth;
         //generate a string representation of the augmented matrix
-        String matrixPrintString = "/" + augMatrixWidth + "\\\n";        
+        String matrixPrintString = "/" + augMatrixWidth + "\\\n";
         for (int i = 0; i < equalMatrixArr.length; ++i) {
             matrixPrintString += "|";
             for (int j = 0; j < equalMatrixArr[i].length; ++j) {

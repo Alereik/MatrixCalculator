@@ -123,7 +123,7 @@ public class RowOperator extends ElementOperator{
                         determinantScalar = fractionMultiplication(determinantScalar, 
                                                                    reciprocalOfScalar);
                         tempMatrix = addScaledRow(tempMatrix, i, j, "-1");//add -pivot to row
-                    }                    
+                    }
                 }
             }
         }
@@ -215,7 +215,7 @@ public class RowOperator extends ElementOperator{
                         showSteps(newMatrix, leftMatrixWidth, "swap", startRow, i, null);
                     }
                 }
-            }   
+            }
         }
         if (firstNonzeroRow) {
             return null;
@@ -262,8 +262,8 @@ public class RowOperator extends ElementOperator{
             }
         }
         //iteration by both row and column
-        for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {            
-            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth, 
+        for (int i = 0,j = 0; i < matrix.length && j < leftMatrixWidth; ++i, ++j) {
+            String[][] tempMatrix = rowReductionInColumn(newMatrix, i, j, leftMatrixWidth,
                                                          showSteps);
             //row does not increment if non zero value not found in last iteration
             if (tempMatrix == null) {

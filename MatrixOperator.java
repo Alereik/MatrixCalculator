@@ -212,7 +212,7 @@ public class MatrixOperator extends RowOperator{
             System.out.println("Square matrix required");
             return null;
         }//get cofactor matrix
-        String[][] cofactorMatrix = new String[matrix.length][matrix[0].length];       
+        String[][] cofactorMatrix = new String[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; ++i) {
             for (int j = 0; j < matrix[0].length; ++j) {
                 cofactorMatrix[i][j] = getCofactor(matrix, i, j);
@@ -287,7 +287,7 @@ public class MatrixOperator extends RowOperator{
                 if (nullSpace[i][j] == null) {//place "0" for all other elements
                     nullSpace[i][j] = "0";
                 }
-            }            
+            }
         }
         printer.printNullSpace(nullSpace, freeVar);
         return nullSpace;
