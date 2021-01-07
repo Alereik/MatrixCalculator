@@ -2,7 +2,8 @@
 A matrix calculator for solving linear algebra problems primarily through the use of elementary row operations.
 
 The matrix elements are whole number and fraction string literals, not doubles or floats.
-The operations performs on these matrices are not limited by the size of a given matrix(Although computation time increases the larger they become).
+
+The operations performed on these matrices are not limited by the size of a given matrix(Although computation time increases the larger they become).
 
 The following can be computed for a given matrix of appropriate dimensions.
   - Reduced Row Echelon Form
