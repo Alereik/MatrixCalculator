@@ -3,8 +3,8 @@ package linearAlgebraCalculator;
 import java.util.ArrayList;
 
 /**
- * Converts a matrix into a string that represents the matrix visually and outputs the string to the
- * user.
+ * Converts a matrix or null space solution into a string that represents the matrix visually and 
+ * outputs the string to the user.
  * 
  * @author AOsterndorff
  *
