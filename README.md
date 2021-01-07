@@ -28,4 +28,4 @@ MatrixOperator - Performs operations on a matrix beyond the row level. Extends R
 
 Matrix - The matrix object that many functions can be performed on.
 
-MatrixCalculator - The location of menus and user input.
+Calculator - The location of menus and user input.
