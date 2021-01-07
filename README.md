@@ -1,5 +1,5 @@
 # MatrixCalculator
-A matrix calculator for solving linear algebra problems primarily through the use of elementary row operations.
+A matrix calculator for solving linear algebra problems.
 
 The matrix elements are whole number and fraction string literals, not doubles or floats.
 
