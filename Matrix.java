@@ -208,7 +208,9 @@ public class Matrix{
         printer.printMatrix(adjoint, numColumns);
     }
     
-    //TODO
+    /**
+     * Outputs the kernel/nullity/null space of a matrix to the user.
+     */
     public void getNullSpace() {
         if(operator.checkInvertibility(matrix)) {
             System.out.println("The null space of this matrix is {0}");
