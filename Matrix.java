@@ -1,4 +1,4 @@
-package matrixCalculator;
+package linearAlgebraCalculator;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class Matrix{
     private int numRows;
     private int numColumns;
     private MatrixOperator operator = new MatrixOperator();
-    private MatrixStringBuilder printer = new MatrixStringBuilder();
+    private PrintStringBuilder printer = new PrintStringBuilder();
     
     public Matrix() {
         Scanner input = new Scanner(System.in);

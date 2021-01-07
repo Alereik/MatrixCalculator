@@ -1,4 +1,4 @@
-package matrixCalculator;
+package linearAlgebraCalculator;
 
 /**
  * Performs row operations on a matrix.

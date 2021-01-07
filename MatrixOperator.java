@@ -1,4 +1,4 @@
-package matrixCalculator;
+package linearAlgebraCalculator;
 
 import java.util.ArrayList;
 

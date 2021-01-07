@@ -1,4 +1,4 @@
-package matrixCalculator;
+package linearAlgebraCalculator;
 
 /**
  * Performs arithmetic operations on string representations of numerical elements in a matrix.
@@ -13,7 +13,7 @@ public class ElementOperator {
      */
     final private int NUMERATOR = 0;
     final private int DENOMINATOR = 1;
-    protected MatrixStringBuilder printer = new MatrixStringBuilder();
+    protected PrintStringBuilder printer = new PrintStringBuilder();
 
     /**
      * Reduces fractions split into an int array of length 2, where the first index of the array is 
