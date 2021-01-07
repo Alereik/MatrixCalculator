@@ -254,10 +254,10 @@ public class MatrixOperator extends RowOperator{
      *    variable in the freeVar ArrayList or not having a free variable in the dependVar 
      *    ArrayList.
      * 3) The null space matrix is created, with each column being a basis vector for the null 
-     *    space. The non zero elements from the columns without leading 1's are placed in the vector
-     *    in the rows of their respective variables. The free variables are then placed in the 
-     *    vectors in their respective positions. All other elements in the array are given the value
-     *    of "0".
+     *    space. The non zero elements from the columns without leading 1's are placed in the 
+     *    of the vectors that are scaled by their respective variables. The free variables are then
+		  placed in the rows in the vectors in their respective positions. All other elements in the
+		  array are given the value of "0".
      * 
      * @param matrix The matrix for which the nullity/null space of the matrix is being computed.
      */
