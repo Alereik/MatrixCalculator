@@ -13,7 +13,7 @@ public class CalcMain {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		boolean done = false;
-		System.out.println("Welcome to the Linear Algebra Calculator.\n");
+		System.out.println("\n\n\n                 Welcome to the Linear Algebra Calculator.\n");
 		while (!done) {
 			System.out.println("                   Please select from these two options.\n\n"
 					  + "          [Enter 1]                                    [Enter 2]\n"
@@ -46,7 +46,7 @@ public class CalcMain {
 				break;
 			}
 		}
-		System.out.println("Goodbye.");
+		System.out.println("\n\n\n                                  Goodbye.\n\n\n");
     }
 	
 	/**
