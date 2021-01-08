@@ -263,10 +263,10 @@ public class MatrixOperator extends RowOperator{
     }
     
     /**
+     * Adds zero rows to the bottom of a matrix if the matrix has more columns than rows.
      * 
-     * 
-     * @param rowReduced
-     * @return
+     * @param rowReduced  The matrix with more columns than rows.
+     * @return tempMatrix The matrix with zero rows added to make it a square matrix.
      */
     private String[][] tempSquareMatrix(String[][] rowReduced) {
     	String[][] tempMatrix = new String[rowReduced[0].length][rowReduced[0].length];
@@ -286,7 +286,9 @@ public class MatrixOperator extends RowOperator{
      * 1) The original matrix is row reduced to RREF.
      * 2) The RREF matrix is checked for leading 1's, with the rows being recorded as having a free
      *    variable in the freeVar ArrayList or not having a free variable in the dependVar 
-     *    ArrayList.
+     *    ArrayList. If the matrix has more columns than rows, the tempSquareMatrix method is called
+     *    to add zero rows to the bottom of the matrix. This ensures that every column is entered 
+     *    into one of the ArrayLists.
      * 3) The null space matrix is created, with each column being a basis vector for the null 
      *    space. The non zero elements from the columns without leading 1's are placed in the 
      *    of the vectors that are scaled by their respective variables. The free variables are then

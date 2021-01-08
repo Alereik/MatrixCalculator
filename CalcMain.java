@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CalcMain {
 	
 	/**
-	 * 
+	 * Main method that displays the main menu to the user.
 	 * 
 	 * @param args Unused.
 	 */
@@ -46,11 +46,11 @@ public class CalcMain {
 				break;
 			}
 		}
-		System.out.println("\n\n\n                                  Goodbye.\n\n\n");
+		System.out.println("\n\n\n                                 Goodbye.\n\n\n");
     }
 	
 	/**
-	 * 
+	 * Pauses the program from returning to a menu. Prompts the user to press enter to continue.
 	 */
 	private static void enterToContinue() {
 		System.out.println("Press ENTER to continue.\n");
@@ -61,9 +61,9 @@ public class CalcMain {
 	}
 	
 	/**
+	 * The menu for conducting operations on a single matrix.
 	 * 
-	 * 
-	 * @param input
+	 * @param input The scanner to take in user input.
 	 */
 	private static void oneMatrix(Scanner input) {
 		Matrix oneMatrix = new Matrix();
@@ -140,10 +140,13 @@ public class CalcMain {
 	}
 	
 	/**
+	 * The menu for choosing which method to use in computing the inverse of a matrix. The row
+	 * reduction method will show each step in the row reduction of the augmented matrix that
+	 * contains the matrix and the identity matrix. Choosing the adjoint method will only display
+	 * the resulting inverse.
 	 * 
-	 * 
-	 * @param input
-	 * @param oneMatrix
+	 * @param input     The scanner to take in user input.
+	 * @param oneMatrix The matrix to be inverted.
 	 */
 	private static void chooseInverseMethod(Scanner input, Matrix oneMatrix) {
 		MatrixOperator operator = new MatrixOperator();
@@ -176,9 +179,10 @@ public class CalcMain {
 	}
 	
 	/**
+	 * The menu for conducting matrix multiplication, addition, or subtraction involving to 
+	 * matrices.
 	 * 
-	 * 
-	 * @param input
+	 * @param input The scanner to take in user input.
 	 */
 	private static void twoMatrix(Scanner input) {
 		MatrixOperator operator = new MatrixOperator();
