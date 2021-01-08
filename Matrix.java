@@ -119,8 +119,7 @@ public class Matrix{
     /**
      * Outputs the matrix scaled by a specified scalar.
      */
-    public void getScaledMatrix() {
-    	Scanner input = new Scanner(System.in);
+    public void getScaledMatrix(Scanner input) {
     	String entry;
     	boolean validEntry = false;
     	do {
@@ -133,7 +132,6 @@ public class Matrix{
     	} while (!validEntry);
     	String[][] scaledMatrix = operator.scaleMatrix(matrix, entry);
     	printer.printMatrix(scaledMatrix, numColumns);
-    	input.close();
     }
         
     /**

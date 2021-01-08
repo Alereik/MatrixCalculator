@@ -90,6 +90,7 @@ public class CalcMain {
 				}
 				userChoice = input.nextInt();
 			} 
+			input.nextLine();
 			switch (userChoice) {
 			case 1:
 				chooseInverseMethod(input, oneMatrix);
@@ -119,7 +120,7 @@ public class CalcMain {
 				enterToContinue();
 				break;
 			case 8:
-				oneMatrix.getScaledMatrix();
+				oneMatrix.getScaledMatrix(input);
 				enterToContinue();
 				break;
 			case 9:
