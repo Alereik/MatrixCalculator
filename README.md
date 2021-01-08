@@ -18,8 +18,7 @@ The following can be computed for a given matrix/ces of appropriate dimensions.
   - Matrix scalar multiplication
   - Matrix addition/subtraction
 
-PrintStringBuilder - Creates strings that visually represents matrices, augmeneted matrices, and null space displays that 
-                     can be printed to the console.
+PrintStringBuilder - Creates strings that visually represents matrices, augmeneted matrices, and null space displays that can be printed to the console.
 
 ElementOperator - Performs basic arithmetic operations on elements of a matrix.
 
