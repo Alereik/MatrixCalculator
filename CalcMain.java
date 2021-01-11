@@ -280,8 +280,8 @@ public class CalcMain {
 	 */
 	public static void orthogonalComplement(Scanner input, VectorSet vectorSet, 
 			                                VectorSetOperator operator) {
-		System.out.println("Would you like to comput the orthogonal complement(W-perp) as well?\n\n"
-				+ "      [Enter 1]                        [Enter 2]\n\n"
+		System.out.println("Would you like to compute the orthogonal complement(W-perp) as well?\n"
+				+ "\n      [Enter 1]                        [Enter 2]\n\n"
 				+ "        - Yes                            - No");
 		int userChoice = 99;
 		while ((userChoice < 0 || userChoice > 9 ) && userChoice != 90) {
