@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author AOsterndorff
  *
  */
-public class Matrix{
+public class Matrix {
     
     private String[][] matrix;
     private int numRows;
@@ -17,10 +17,9 @@ public class Matrix{
     private MatrixOperator operator = new MatrixOperator();
     private PrintStringBuilder printer = new PrintStringBuilder();
     
-    public Matrix() {
-        Scanner input = new Scanner(System.in);
+    public Matrix(Scanner input) {
         setDimensions(input);
-        matrix = setMatrixArray(numRows, numColumns, input);
+        matrix = setMatrixArray(input);
     }
     
     public Matrix(String[][] matrix) {
@@ -60,11 +59,10 @@ public class Matrix{
      * invalid entry, the entry is not accepted and the user is re-prompted to enter that position's
      * element until a valid entry is entered. 
      * 
-     * @param numRows    The number of rows in the matrix.
-     * @param numColumns The number of columns in the matrix.
-     * @return matrix    The matrix consisting of elements entered by the user.
+     * @param input   The scanner that obtains the user's input.
+     * @return matrix The matrix consisting of elements entered by the user.
      */
-    private String[][] setMatrixArray(int numRows, int numColumns, Scanner input) {
+    private String[][] setMatrixArray(Scanner input) {
         String[][] matrix = new String[numRows][numColumns];
         for (int i = 0; i < matrix.length; ++i) {
             Arrays.fill(matrix[i], "_");
@@ -235,12 +233,12 @@ public class Matrix{
      * Outputs the kernel/nullity/null space of a matrix to the user.
      */
     public void getNullSpace() {
-        if(operator.checkInvertibility(matrix)) {
-            System.out.println("The null space of this matrix is {0}\n");
+        if (operator.getNullSpace(matrix, false) != null) {
+            System.out.println("The null space of this matrix is:");
+            operator.getNullSpace(matrix, true);
         }
         else {
-            System.out.println("The null space of this matrix is:");
-            operator.getNullSpace(matrix);
+        	System.out.println("The null space of this matrix is {0}\n");
         }
     }
     

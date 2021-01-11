@@ -75,6 +75,7 @@ public class MatrixOperator extends RowOperator{
      * @param matrix2 The matrix on the right of the multiplication.
      */
     public void multiplyMatrices(String[][] matrix1, String[][] matrix2) {
+    	PrintStringBuilder printer = new PrintStringBuilder();
         String[][] newMatrix = new String[matrix1.length][matrix2[0].length];
         if (matrix1[0].length != matrix2.length) {//make sure matrix1 numRows == matrix2 numColumns
             System.out.println("These matrices cannot be multiplied in this order\n");
@@ -102,6 +103,7 @@ public class MatrixOperator extends RowOperator{
      * @param add     Performs addition on the matrices if true, subtraction if false.
      */
     public void addSubtractMatrices(String[][] matrix1, String[][] matrix2, boolean add) {
+    	PrintStringBuilder printer = new PrintStringBuilder();
         if (matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length) {
             System.out.println("Both matrices must be the same size\n");
             return;
@@ -296,8 +298,9 @@ public class MatrixOperator extends RowOperator{
 		  array are given the value of "0".
      * 
      * @param matrix The matrix for which the nullity/null space of the matrix is being computed.
+     * @param print  prints the null space display if true.
      */
-    public String[][] getNullSpace(String[][] matrix) {
+    public String[][] getNullSpace(String[][] matrix, boolean print) {
         ArrayList<Integer> freeVar = new ArrayList<>();
         ArrayList<Integer> dependVar= new ArrayList<>();
         String[][] rowReduced = rowReduce(matrix, matrix[0].length, false); 
@@ -312,7 +315,10 @@ public class MatrixOperator extends RowOperator{
             else {
                 dependVar.add(j);//record dependent variables in ArrayList
             }
-        }                
+        }
+        if (freeVar.size() == 0) {
+        	return null;
+        }
         String[][] nullSpace = new String[rowReduced[0].length][freeVar.size()];
         for (int j = 0; j < freeVar.size(); ++j) {//columns in nullSpace are the vectors of nullity
             for (int i = 0, k = 0; i < rowReduced[0].length; ++i, ++k) {
@@ -328,7 +334,10 @@ public class MatrixOperator extends RowOperator{
                 }
             }
         }
-        printer.printNullSpace(nullSpace, freeVar);
+        if (print) {
+        	PrintStringBuilder printer = new PrintStringBuilder();
+        	printer.printNullSpace(nullSpace, freeVar);
+        }
         return nullSpace;
     }
 }

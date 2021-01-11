@@ -152,6 +152,7 @@ public class RowOperator extends ElementOperator{
      */
     private void showSteps(String[][] newMatrix, int leftMatrixWidth, String operation, 
                                  int row1, int row2, String scalar) {
+    	PrintStringBuilder printer = new PrintStringBuilder();
         ++row1;
         ++row2;
         //if denominator of scalar is one, turn scalar into whole number

@@ -19,7 +19,7 @@ public class PrintStringBuilder {
      * @param matrix                The input parameter matrix array.
      * @return equalizedMatrixArr   The new matrix array with elements of equal length.
      */
-    private String[][] equalizeElementlength(String[][] matrix) {
+    private String[][] equalizeElementLength(String[][] matrix) {
         String[][] equalizedMatrixArr = new String[matrix.length][matrix[0].length];
         int greatestLength = 0;
         for (int i = 0; i < matrix.length; ++i) {//find length of longest element
@@ -90,7 +90,7 @@ public class PrintStringBuilder {
      */
     private String getMatrixString(String[][] matrix) {
         //call equalizeElementWidth to create matrix with element strings of equal length
-        String[][] equalMatrixArr = equalizeElementlength(matrix);
+        String[][] equalMatrixArr = equalizeElementLength(matrix);
         //get width of matrix to build rows without elements
         String matrixWidth = getMatrixWidthString(equalMatrixArr);
         //generate a string representation of the matrix
@@ -140,8 +140,8 @@ public class PrintStringBuilder {
      */
     private String getAugmentedMatrixString(String[][] matrix, String[][] rightMatrix) {
         //call equalizeElementWidth to create arrays with element strings of equal length
-        String[][] equalMatrixArr = equalizeElementlength(matrix);
-        String[][] equalAugMatrix = equalizeElementlength(rightMatrix);
+        String[][] equalMatrixArr = equalizeElementLength(matrix);
+        String[][] equalAugMatrix = equalizeElementLength(rightMatrix);
         //get widths of matrices to build rows without elements
         String leftMatrixWidth = getMatrixWidthString(equalMatrixArr);
         String rightMatrixWidth = getMatrixWidthString(equalAugMatrix);
@@ -251,9 +251,23 @@ public class PrintStringBuilder {
             }
         }
         for (int i = 0; i < variablePrintArr.length; ++i) {
-            variablePrintArr[i] = equalizeElementlength(variablePrintArr[i]);
+            variablePrintArr[i] = equalizeElementLength(variablePrintArr[i]);
         }
         return variablePrintArr;
+    }
+    
+    /**
+     * Converts a one dimensional vector into a two dimensional array so that the printMatrix method
+     * can be called to print to the console.
+     * 
+     * @param vector The vector to be printed.
+     */
+    public void printVector(String[] vector) {
+    	String[][] vector2D = new String[vector.length][1];
+    	for (int i = 0; i < vector.length; ++i) {
+    		vector2D[i][0] = vector[i];
+    	}
+    	printMatrix(vector2D, vector2D[0].length);
     }
     
     /**
@@ -312,7 +326,7 @@ public class PrintStringBuilder {
      */
     public void printNullSpace(String[][] set, ArrayList<Integer> freeVar) {
         String[][][] variablePrintArr = variableLabelArr(set, freeVar);
-        set = equalizeElementlength(set);
+        set = equalizeElementLength(set);
         String nullityPrintString = nullityTopBottom(variablePrintArr, set, true);
         for (int i = 0; i < set.length; ++i) {
             for (int j = 0, k = 0, l = 0; j < variablePrintArr.length + set[0].length; ++j) {
@@ -329,5 +343,40 @@ public class PrintStringBuilder {
         }
         nullityPrintString += nullityTopBottom(variablePrintArr, set, false);
         System.out.println(nullityPrintString);
+    }
+    
+    /**
+     * Outputs a set of column vectors to the user.
+     * 
+     * @param vectorSetArr The two dimensional array containing the vectors. Each vector is stored
+     * 					   in a vectorSetArr[n].
+     */
+    public void printVectorSet(String[][] vectorSetArr) {
+    	String[][] vectorPrintArr = equalizeElementLength(vectorSetArr);
+    	String vectorPrintString = "";
+    	for (int i = 0; i < vectorSetArr[0].length; ++i) {//build tops of the parenthesis
+    		vectorPrintString += "/" + " ".repeat(vectorPrintArr[0][0].length()) + "\\";
+			if (i < vectorSetArr[0].length - 1) {
+				vectorPrintString += "  ";
+			}
+    	}
+    	vectorPrintString += "\n";  														
+    		for (int i = 0; i < vectorSetArr.length; ++i) {//build the vectors
+    			for (int j = 0; j < vectorSetArr[0].length; ++j) {
+    			vectorPrintString += "|" + vectorPrintArr[i][j] + "|";
+    			if (j < vectorSetArr[0].length - 1) {
+    				vectorPrintString += "  ";
+    			}
+    		}
+    		vectorPrintString += "\n";
+    	}
+    	for (int i = 0; i < vectorSetArr[0].length; ++i) {//build bottoms of the parenthesis
+    		vectorPrintString += "\\" + " ".repeat(vectorPrintArr[0][0].length()) + "/";
+			if (i < vectorSetArr[0].length - 1) {
+				vectorPrintString += ", ";
+			}
+    	}
+    	vectorPrintString += "\n";
+    	System.out.println(vectorPrintString);
     }
 }

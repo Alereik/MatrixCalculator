@@ -15,20 +15,28 @@ public class CalcMain {
 		boolean done = false;
 		System.out.println("\n\n\n                 Welcome to the Linear Algebra Calculator.\n");
 		while (!done) {
-			System.out.println("                   Please select from these two options.\n\n"
-					  + "          [Enter 1]                                    [Enter 2]\n"
-					  + "   Build a matrix to compute it's:           Build two matrices in order "
-					  + "to:\n"
-					  + "       - Inverse                                 - Multiply Matrices\n"
-					  + "       - Reduced Row Echelon Form                - Add Matrices\n"
-					  + "       - Adjoint                                 - Subtract Matrices\n"
-					  + "       - Upper Triangular Form\n"
-					  + "       - Transpose\n"
-					  + "       - Determinant\n"
-					  + "       - Null Space                                    [Enter 0]\n"
-					  + "       - Scalar Multiple                                - Quit");
+			System.out.println("                   Please select from these four options.\n\n"
+					  + "          [Enter 1]                                  [Enter 3]\n"
+					  + "  Build a matrix to compute it's:          Build a set of vectors in"
+					  + " order to: \n"
+					  + "       - Inverse                               - Determine if a vector\n"
+					  + "       - Reduced Row Echelon Form                is within it's span\n"
+					  + "       - Adjoint                               - Determine if it is\n"
+					  + "       - Upper Triangular Form                   linearly independent\n"
+					  + "       - Transpose                             - Determine if it forms a\n"
+					  + "       - Determinant                             basis for R^n\n"
+					  + "       - Null Space                            - Get a vector with\n"
+					  + "       - Scalar Multiple                         respect to a basis\n"
+					  + "                                               - Apply the Gram-Scmidt\n"
+					  + "          [Enter 2]                              process to compute an\n"
+					  + "  Build two matrices in order to:                orthogonal basis\n"
+					  + "      - Multiply Matrices                      - Compute an orthogonal\n"
+					  + "      - Add Matrices                             complement to an \n"
+					  + "      - Subtract Matrices                        orthogonal basis\n\n"
+					  + "                                                     [Enter 0]\n"
+					  + "                                                      - Quit\n");
 			int userChoice = 99;
-			while (userChoice != 1 && userChoice != 2 && userChoice != 0) {
+			while (userChoice < 0 || userChoice > 3) {
 				while(!input.hasNextInt()) {
 					input.next();
 				}
@@ -40,6 +48,9 @@ public class CalcMain {
 				break;
 			case 2:
 				twoMatrix(input);
+				break;
+			case 3:
+				vectorSet(input);
 				break;
 			case 0:
 				done = true;
@@ -66,7 +77,7 @@ public class CalcMain {
 	 * @param input The scanner to take in user input.
 	 */
 	private static void oneMatrix(Scanner input) {
-		Matrix oneMatrix = new Matrix();
+		Matrix oneMatrix = new Matrix(input);
 		if (oneMatrix.getMatrixArray().length < 2 || oneMatrix.getMatrixArray()[0].length < 2) {
 			System.out.println("Vectors are not supported by this option.\n");
 			return;
@@ -186,8 +197,8 @@ public class CalcMain {
 	 */
 	private static void twoMatrix(Scanner input) {
 		MatrixOperator operator = new MatrixOperator();
-		Matrix oneMatrix = new Matrix();
-		Matrix twoMatrix = new Matrix();
+		Matrix oneMatrix = new Matrix(input);
+		Matrix twoMatrix = new Matrix(input);
 		if (oneMatrix.getMatrixArray().length < 2 || oneMatrix.getMatrixArray()[0].length < 2 
 		    || twoMatrix.getMatrixArray().length < 2 || twoMatrix.getMatrixArray()[0].length < 2) {
 			System.out.println("Vectors are not supported by this option.\n");
@@ -250,6 +261,82 @@ public class CalcMain {
 				break;
 			case 8:
 				twoMatrix.print();
+				enterToContinue();
+				break;
+			case 90:
+				done = true;
+				break;
+			}
+		}
+	}
+	
+	public static void orthogonalComplement(Scanner input, VectorSet vectorSet, 
+			                                VectorSetOperator operator) {
+		System.out.println("Would you like to comput the orthogonal complement(W-perp) as well?\n\n"
+				+ "      [Enter 1]                        [Enter 2]\n\n"
+				+ "        - Yes                            - No");
+		int userChoice = 99;
+		while ((userChoice < 0 || userChoice > 9 ) && userChoice != 90) {
+			while(!input.hasNextInt()) {
+				input.next();
+			}
+			userChoice = input.nextInt();
+		} 
+		switch (userChoice) {
+		case 1:
+			vectorSet.getOrthogonalComplement(vectorSet.getVectorSetArr());;
+			enterToContinue();
+			break;
+		case 2:
+			break;
+		}
+	}
+	
+	/**
+	 * The menu for conducting operations on a set of vectors.
+	 * 
+	 * @param input The scanner to take in user input.
+	 */
+	public static void vectorSet(Scanner input) {
+		VectorSetOperator operator = new VectorSetOperator();
+		VectorSet vectorSet = new VectorSet(input);
+		boolean done = false;
+		while(!done ) {
+			System.out.println("       What would you like to do?\n"
+					+ "Enter: [1] Determine if a vector is within the span\n"
+					+ "       [2] Determine if the set is linearly independent\n"
+					+ "       [3] Determine if the set forms a basis for R^n\n"
+					+ "       [4] Transform a vector to a vector with respect to a basis\n"
+					+ "       [5] Apply the Gram-Schmidt process to compute an orthogonal basis\n\n"
+					+ "       [90] Quit");
+			int userChoice = 99;
+			while ((userChoice < 0 || userChoice > 8 ) && userChoice != 90) {
+				while(!input.hasNextInt()) {
+					input.next();
+				}
+				userChoice = input.nextInt();
+			}
+			input.nextLine();
+			switch (userChoice) {
+			case 1:
+				vectorSet.getVectorWithinSpan(input);
+				enterToContinue();
+				break;
+			case 2:
+				vectorSet.getLinearDependence();
+				enterToContinue();
+				break;
+			case 3:
+				vectorSet.getIsBasisForRn();
+				enterToContinue();
+				break;
+			case 4:
+				vectorSet.getVrespectS(input);
+				enterToContinue();
+				break;
+			case 5:
+				vectorSet.getOrthogonalBasis();
+				orthogonalComplement(input, vectorSet, operator);
 				enterToContinue();
 				break;
 			case 90:
