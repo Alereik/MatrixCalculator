@@ -166,7 +166,7 @@ public class VectorSetOperator extends MatrixOperator{
 	 * @return true/false  True if the set is linearly independent, false otherwise.
 	 */
 	public boolean getLinearDependence(String[][] vectorSetArr, boolean print) {
-		String[][] answerArr = rowReduce(vectorSetArr, vectorSetArr.length, true);
+		String[][] answerArr = rowReduce(vectorSetArr, vectorSetArr[0].length, true);
 		for (int i = 0; i < answerArr.length; ++i) {//check for > 1 non zero element in a row
 			int nonZeroCount = 0;
 			for (int j = 0; j < answerArr[0].length; ++j) {
