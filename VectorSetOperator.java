@@ -197,7 +197,7 @@ public class VectorSetOperator extends MatrixOperator{
 	 */
 	public boolean getIsBasisForRn(String[][] vectorSetArr, boolean showRREFSteps) {
 		boolean isBasis = true;
-		String[][] answerArr = rowReduce(vectorSetArr, vectorSetArr.length, showRREFSteps);
+		String[][] answerArr = rowReduce(vectorSetArr, vectorSetArr[0].length, showRREFSteps);
 		if (answerArr.length > answerArr[0].length) {//check for more dimensions than vectors
 			isBasis = false;
 		}
