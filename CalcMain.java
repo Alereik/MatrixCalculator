@@ -27,7 +27,7 @@ public class CalcMain {
 				  + "       - Determinant                             a basis for R^n\n"
 				  + "       - Null Space                            - Get a vector with\n"
 				  + "       - Scalar Multiple                         respect to a basis\n"
-				  + "                                               - Apply the Gram-Scmidt\n"
+				  + "                                               - Apply the Gram-Schmidt\n"
 				  + "          [Enter 2]                              process to compute an\n"
 				  + "  Build two matrices in order to:                orthogonal basis\n"
 				  + "      - Multiply Matrices                      - Compute an orthogonal\n"
@@ -293,7 +293,6 @@ public class CalcMain {
 		switch (userChoice) {
 		case 1:
 			vectorSet.getOrthogonalComplement(vectorSet.getVectorSetArr());;
-			enterToContinue();
 			break;
 		case 2:
 			break;
