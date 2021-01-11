@@ -270,6 +270,14 @@ public class CalcMain {
 		}
 	}
 	
+	/**
+	 * Prompts the user to choose whether or not they want to compute the orthogonal complement of
+	 * the orthogonal basis that was just computed, and outputs it to the user if they chose yes.
+	 * 
+	 * @param input     The scanner to take in user input.
+	 * @param vectorSet The set of vectors the the orthogonal basis was computed from.
+	 * @param operator  The vector set operator that computes the orthogonal complement.
+	 */
 	public static void orthogonalComplement(Scanner input, VectorSet vectorSet, 
 			                                VectorSetOperator operator) {
 		System.out.println("Would you like to comput the orthogonal complement(W-perp) as well?\n\n"

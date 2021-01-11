@@ -142,7 +142,7 @@ public class VectorSet {
 		System.out.println("This set was transformed into the orthogonal basis below:");
 		printer.printVectorSet(orthogonalBasis);
 	}	
-	//TODO TESTING
+
 	/**
 	 * Outputs the orthogonal complement of the span of the set of vectors.
 	 * 
