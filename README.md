@@ -40,4 +40,4 @@ Matrix - The matrix object that many functions can be performed on.
 
 VectorSet - A set of vectors from which computations can be performed on, and for which vectors can be assesed as to their relation to.
 
-MainCalc - The location of menus and user input.
+CalcMain - The location of menus and user input.
