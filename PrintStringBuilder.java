@@ -3,16 +3,16 @@ package linAlgCalc;
 import java.util.ArrayList;
 
 /**
- * Converts a matrix or null space solution into a string that represents the matrix visually and 
+ * Converts a matrix or null space solution into a string that represents the matrix visually and
  * outputs the string to the user.
  * 
  * @author AOsterndorff
  *
  */
 public class PrintStringBuilder {
-    
+
     /**
-     * Equalizes the length of the element strings from the parameter matrix array, then returns a 
+     * Equalizes the length of the element strings from the parameter matrix array, then returns a
      * new array containing white space padded elements from the parameter array so that the element
      * strings are of equal length.
      * 
@@ -34,7 +34,7 @@ public class PrintStringBuilder {
             for (int j = 0; j < matrix[i].length; ++j) {
                 String padLeft = " ";
                 String padRight = " ";
-                difference = greatestLength - matrix[i][j].length();               
+                difference = greatestLength - matrix[i][j].length();
                 if (difference % 2 == 0) {//even number of spaces to pad element
                     padLeft += padLeft.repeat(difference / 2);
                     padRight += padRight.repeat(difference / 2);
@@ -51,9 +51,9 @@ public class PrintStringBuilder {
     }
 
     /**
-     * Returns a string equal to the sum of the lengths of a row of elements in a matrix after 
-     * having padded each element of that row with a whitespace on either side. This facilitates 
-     * correct spacing between the parenthesis of the matrix, as well as correct spacing between 
+     * Returns a string equal to the sum of the lengths of a row of elements in a matrix after
+     * having padded each element of that row with a whitespace on either side. This facilitates
+     * correct spacing between the parenthesis of the matrix, as well as correct spacing between
      * parenthesis and the augmentation border of augmented matrices.
      * 
      * @param matrix       The matrix whose width needs to be determined. Should have been equalized
@@ -73,13 +73,14 @@ public class PrintStringBuilder {
         matrixWidth += " ".repeat(elementWidth);
         return matrixWidth;
     }
+
     /**
-     * Outputs a matrix from a two-dimensional array. 
+     * Outputs a matrix from a two-dimensional array.
      * 
-     * 1) First the equalizeElementLength method is called to ensure that the strings in each 
-     *    element are of equal length, with the longest length element determining the length that 
+     * 1) First the equalizeElementLength method is called to ensure that the strings in each
+     *    element are of equal length, with the longest length element determining the length that
      *    all of the elements will be.   
-     * 2) A string of white space the width of the matrix is created by calling the 
+     * 2) A string of white space the width of the matrix is created by calling the
      *    getMatrixWidthString method. This will fill the spaces between parenthesis in the rows not
      *    filled by elements of the array.
      * 3) Finally, a string constituting a visual representation of the matrix is generated and
@@ -110,12 +111,12 @@ public class PrintStringBuilder {
         }
         return matrixPrintString;
     }
-    
+
     /**
-     * Returns a string that visually represents an augmented matrix consisting of a matrix and a 
-     * vector by converting one of its parameters into a suitable parameter for the other 
-     * getAugmentedMatrixString method. The vector parameter is converted from a single dimensional 
-     * array of length n to a two dimensional matrix of dimensions n x 1. Both parameters are then 
+     * Returns a string that visually represents an augmented matrix consisting of a matrix and a
+     * vector by converting one of its parameters into a suitable parameter for the other
+     * getAugmentedMatrixString method. The vector parameter is converted from a single dimensional
+     * array of length n to a two dimensional matrix of dimensions n x 1. Both parameters are then
      * passed on to the other getAugmentedMatrixString method to create the string
      * 
      * @param matrix             The matrix on the left side of the augmented matrix.
@@ -130,7 +131,7 @@ public class PrintStringBuilder {
         String matrixPrintString = getAugmentedMatrixString(matrix, vectorMatrix);
         return matrixPrintString;
     }
-    
+
     /**
      * Returns a string that visually represents an augmented matrix consisting of two matrices.
      * 
@@ -167,12 +168,12 @@ public class PrintStringBuilder {
         }
         return matrixPrintString;
     } 
-    
+
     /**
-     * Prints out a string representation of a matrix or augmented matrix depending on the 
-     * difference between the width of the parameter matrix and the leftMatrixWidth parameter. If 
-     * the two are the same, then the matrix is not an augmented matrix and is simply printed. If 
-     * leftMatrix width is less than the width of the parameter matrix, then the matrix is split 
+     * Prints out a string representation of a matrix or augmented matrix depending on the
+     * difference between the width of the parameter matrix and the leftMatrixWidth parameter. If
+     * the two are the same, then the matrix is not an augmented matrix and is simply printed. If
+     * leftMatrix width is less than the width of the parameter matrix, then the matrix is split
      * into its constituent parts before printing.
      * 
      * @param matrix          The entire matrix. May be an augmented matrix.
@@ -216,13 +217,13 @@ public class PrintStringBuilder {
             System.out.println(getAugmentedMatrixString(leftMatrix, rightMatrix));
         }
     }
-    
+
     /**
      * Builds two dimensional string arrays from the Integer elements in the ArrayList freeVar, then
      * calls the equalizeElementLength method in order to equalize the elements lengths. The two
      * dimensional arrays are stored in a three dimensional array.
      * 
-     * @param set               The matrix containing the basis vectors of the null space as it's 
+     * @param set               The matrix containing the basis vectors of the null space as it's
      *                          columns.
      * @param freeVar           The column indexes in which free variables were found in the reduced
      *                          row echelon form of the original matrix.
@@ -255,7 +256,7 @@ public class PrintStringBuilder {
         }
         return variablePrintArr;
     }
-    
+
     /**
      * Converts a one dimensional vector into a two dimensional array so that the printMatrix method
      * can be called to print to the console.
@@ -269,12 +270,12 @@ public class PrintStringBuilder {
     	}
     	printMatrix(vector2D, vector2D[0].length);
     }
-    
+
     /**
      * Creates the top and bottom rows of the string representation of the null space display.
      * 
      * @param variablePrintArr    The array of variable label arrays.
-     * @param set                 The matrix containing the  basis vectors of the null space as it's 
+     * @param set                 The matrix containing the  basis vectors of the null space as it's
      *                            columns.
      * @param top                 Creates the top row if true, bottom row if false.
      * @return nullityPrintString The top or bottom row of the null space display string, depending
@@ -309,12 +310,12 @@ public class PrintStringBuilder {
         nullityPrintString += "\n";
         return nullityPrintString;
     }
-    
+
     /**
-     * Outputs a string representation of a null space solution display. 
-     * 1) The variableLabelArr method is called to create string arrays of the variable labels, so 
+     * Outputs a string representation of a null space solution display.
+     * 1) The variableLabelArr method is called to create string arrays of the variable labels, so
      *    that the elements can space the null space basis vectors evenly.
-     * 2) The equalizeElementLength method is called in order to equalize the lengths of the 
+     * 2) The equalizeElementLength method is called in order to equalize the lengths of the
      *    elements in 'set'.
      * 3) The nullityBracketEnds method is called to create the top row of the string.
      * 4) The body of the null space display is constructed.
@@ -344,7 +345,7 @@ public class PrintStringBuilder {
         nullityPrintString += nullityTopBottom(variablePrintArr, set, false);
         System.out.println(nullityPrintString);
     }
-    
+
     /**
      * Outputs a set of column vectors to the user.
      * 
@@ -360,7 +361,7 @@ public class PrintStringBuilder {
 				vectorPrintString += "  ";
 			}
     	}
-    	vectorPrintString += "\n";  														
+    	vectorPrintString += "\n";
     		for (int i = 0; i < vectorSetArr.length; ++i) {//build the vectors
     			for (int j = 0; j < vectorSetArr[0].length; ++j) {
     			vectorPrintString += "|" + vectorPrintArr[i][j] + "|";

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class CalcMain {
-	
+
 	/**
 	 * Main method that displays the main menu to the user.
 	 * 
@@ -59,7 +59,7 @@ public class CalcMain {
 		}
 		System.out.println("\n\n\n                                 Goodbye.\n\n\n");
     }
-	
+
 	/**
 	 * Pauses the program from returning to a menu. Prompts the user to press enter to continue.
 	 */
@@ -70,7 +70,7 @@ public class CalcMain {
 		} catch (IOException e) {
 		}
 	}
-	
+
 	/**
 	 * The menu for conducting operations on a single matrix.
 	 * 
@@ -149,7 +149,7 @@ public class CalcMain {
 			}
 		}
 	}
-	
+
 	/**
 	 * The menu for choosing which method to use in computing the inverse of a matrix. The row
 	 * reduction method will show each step in the row reduction of the augmented matrix that
@@ -188,7 +188,7 @@ public class CalcMain {
 			break;
 		}
 	}
-	
+
 	/**
 	 * The menu for conducting matrix multiplication, addition, or subtraction involving to 
 	 * matrices.
@@ -211,7 +211,7 @@ public class CalcMain {
 					+ "Enter: [1] Multiply                      [5] Show first matrix dimensions\n"
 					+ "       [2] Add                           [6] Show first matrix\n"
 					+ "       [3] Subtract                      [7] Show second matrix dimensions\n"
-					+ "       [4] Swap matrix order             [8] Show second matrix\n\n"             
+					+ "       [4] Swap matrix order             [8] Show second matrix\n\n"
 					+ "                                         [90] Quit");
 			int userChoice = 99;
 			while ((userChoice < 0 || userChoice > 8 ) && userChoice != 90) {
@@ -269,7 +269,7 @@ public class CalcMain {
 			}
 		}
 	}
-	
+
 	/**
 	 * Prompts the user to choose whether or not they want to compute the orthogonal complement of
 	 * the orthogonal basis that was just computed, and outputs it to the user if they chose yes.
@@ -298,7 +298,7 @@ public class CalcMain {
 			break;
 		}
 	}
-	
+
 	/**
 	 * The menu for conducting operations on a set of vectors.
 	 * 

@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class VectorSetOperator extends MatrixOperator{
-    
+
 	/**
 	 * Prompts the user to enter the elements of a vector.
 	 * 
@@ -38,12 +38,12 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return vector;
 	}
-	
+
 	/**
 	 * Creates an ArrayList containing the indexes of all the zero rows in a matrix comprised of a
 	 * set of vectors as its columns.
 	 * 
-	 * @param augmentedRREF The augmented matrix array comprised of the vector set augmented with 
+	 * @param augmentedRREF The augmented matrix array comprised of the vector set augmented with
 	 * 					    another vector and row reduced to reduced row echelon form (RREF).
 	 * @return zeroRows     The ArrayList containing the zeroRows.
 	 */
@@ -62,9 +62,9 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return zeroRows;
 	}
-	
+
 	/**
-	 * Determines whether or not a matrix, augmented with a vector and row reduced to reduced row 
+	 * Determines whether or not a matrix, augmented with a vector and row reduced to reduced row
 	 * echelon form (RREF) has a solution. The getZeroRows method is called in order to make a list
 	 * of the indexes of all zero rows found in the RREF augmented matrix.
 	 * 
@@ -82,11 +82,11 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return solution;
 	}
-	
+
 	/**
-	 * Augments a vector to a matrix consisting of a set of vectors, and row reduces the resulting 
-	 * augmented matrix to reduced row echelon form (RREF). The augmented vector is place as the 
-	 * last column of the augmented matrix. 
+	 * Augments a vector to a matrix consisting of a set of vectors, and row reduces the resulting
+	 * augmented matrix to reduced row echelon form (RREF). The augmented vector is place as the
+	 * last column of the augmented matrix.
 	 * 
 	 * @param vectorSetArr		   The set of vectors to be augmented with the vector.
 	 * @param vector			   The vector to be augmented to the set of vectors.
@@ -102,7 +102,7 @@ public class VectorSetOperator extends MatrixOperator{
 		String[][] augmentedRowReduced = rowReduce(augmented, vectorSetArr[0].length, true);
 		return augmentedRowReduced;
 	}
-	
+
 	/**
 	 * Determines whether or not a vector is within the span of a set of vectors.
 	 * 1) The setVectorToCheck method is called in order to prompt the user to enter the vector that
@@ -111,12 +111,12 @@ public class VectorSetOperator extends MatrixOperator{
 	 *    set of vectors and the new vector, and then row reduce that augmented matrix to reduced
 	 *    row echelon form (RREF).
 	 * 3) The getIsSolution method is called to determine whether or not the vector falls within the
-	 *    span of the set. If the augmented matrix in RREF has a solution, then the vector falls 
+	 *    span of the set. If the augmented matrix in RREF has a solution, then the vector falls
 	 *    within the span. If there is no solution, then the vector does not fall within the span.
 	 * 
 	 * @param vectorSetArr The given set of vectors.
 	 * @param input		   The scanner that obtains the user's input.
-	 * @return withinSpan  Returns true if the vector is within the span of the given set of 
+	 * @return withinSpan  Returns true if the vector is within the span of the given set of
 	 * 					   vectors, false otherwise.
 	 */
 	public boolean getIsVectorInSpan(String[][] vectorSetArr, Scanner input) {
@@ -125,7 +125,7 @@ public class VectorSetOperator extends MatrixOperator{
 		boolean withinSpan = getIsSolution(augmentedRREF);
 		return withinSpan;
 	}
-	
+
 	/**
 	 * Computes and returns a vector with respect to a given basis set of vectors.
 	 * 1) The setVectorToCheck method is called in order to prompt the user to enter the vector that
@@ -156,7 +156,7 @@ public class VectorSetOperator extends MatrixOperator{
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Returns whether or not the set is linearly independent. Outputs the result to the user in
 	 * print statements depending on the value of the parameter 'print'.
@@ -186,7 +186,7 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return true;
 	}	
-	
+
 	/**
 	 * Determines whether or not a set of vectors forms a basis for R^n, n being the number of
 	 * dimensions of the real number space (the number of element in the vectors of the set).
@@ -210,7 +210,7 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return isBasis;
 	}
-	
+
 	/**
 	 * Scales a vector by the largest denominator found within its elements in order to remove any
 	 * fractions.
@@ -229,18 +229,18 @@ public class VectorSetOperator extends MatrixOperator{
 				if (denominator > Integer.parseInt(scalar)) {
 					scalar = String.valueOf(denominator);
 				}
-			}			
+			}
 		}
 		for (int i = 0; i < vector.length; ++i) {//scale all elements by that largest denominator
 			scaled[i] = fractionMultiplication(vector[i], scalar);
 		}
 		return scaled;
 	}
-	
+
 	/**
 	 * Adds or subtracts vectors, depending on the specified boolean parameter.
 	 * 
-	 * @param vector1 The first vector, that has a vector added to it or has a vector subtracted 
+	 * @param vector1 The first vector, that has a vector added to it or has a vector subtracted
 	 * 				  from it.
 	 * @param vector2 The second vector, that is added or subtracted from the first vector.
 	 * @param add     Add the second vector to the first if true, subtracts the second vector from
@@ -259,7 +259,7 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Dot multiplies two vectors.
 	 * 
@@ -275,7 +275,7 @@ public class VectorSetOperator extends MatrixOperator{
 		}
 		return dotProduct;
 	}
-	
+
 	/**
 	 * Applies the Gram-Schmidt algorithm to a basis set of vectors, transforming the set into an
 	 * orthogonal basis.

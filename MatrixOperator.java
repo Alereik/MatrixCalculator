@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  */
 public class MatrixOperator extends RowOperator{
-    
+
 	/**
 	 * Returns a matrix scaled by a specified scalar.
 	 * 
@@ -24,6 +24,7 @@ public class MatrixOperator extends RowOperator{
 		}
 		return newMatrix;
 	}
+
     /**
      * Returns a sub matrix of a matrix consisting of all the rows and column of the original matrix
      * minus the row and column of the indicated element's position.
@@ -45,7 +46,7 @@ public class MatrixOperator extends RowOperator{
         }
         return subMatrix;
      }
-    
+
     /**
      * Returns the string representation of the cofactor of an element. Row and column are 
      * incremented by one, as the correct computation of the sign requires the vernacular numbering 
@@ -66,9 +67,9 @@ public class MatrixOperator extends RowOperator{
         String cofactor = fractionMultiplication(sign, subDeterminant);
         return cofactor;
     }
-    
+
     /**
-     * Multiplies two matrices together, with matrix one being on the left and matrix two being on 
+     * Multiplies two matrices together, with matrix one being on the left and matrix two being on
      * the right of the multiplication order.
      * 
      * @param matrix1 The matrix on the left of the multiplication.
@@ -89,12 +90,12 @@ public class MatrixOperator extends RowOperator{
                     dotProduct = fractionAddition(dotProduct, elementProduct);
                 }
                 newMatrix[i][j] = dotProduct;
-            }            
+            }
         }
         System.out.println("The product of the two matrices multiplied in this order is:");
         printer.printMatrix(newMatrix, matrix2[0].length);
     }
-    
+
     /**
      * Adds or subtracts two matrices, outputting the resulting matrix to the user.
      * 
@@ -129,7 +130,7 @@ public class MatrixOperator extends RowOperator{
         }
         printer.printMatrix(newMatrix, matrix1[0].length);
     }
-    
+
     /**
      * Creates an augmented matrix by appended the identity matrix to the right of the parameter
      * matrix.
@@ -158,7 +159,7 @@ public class MatrixOperator extends RowOperator{
         }
         return augmentedMatrix;
     }
-    
+
     /**
      * Determines whether a matrix is invertible.
      * 
@@ -179,13 +180,13 @@ public class MatrixOperator extends RowOperator{
         }
         return true;
     }
-    
+
     /**
-     * Returns the inverse of a matrix, computed through row reduction, to the user . Requires a 
+     * Returns the inverse of a matrix, computed through row reduction, to the user . Requires a
      * square matrix.
      * 
      * @param matrix The matrix to be inverted if possible.
-     * @param steps  Shows each row reduction step applied to the augmented matrix if true, or only 
+     * @param steps  Shows each row reduction step applied to the augmented matrix if true, or only
      *               the inverse if false.
      */
     public String[][] getRowReducedInverse(String[][] matrix) {
@@ -205,7 +206,7 @@ public class MatrixOperator extends RowOperator{
         }
         return inverse;
     }
-    
+
     /**
      * Returns the transpose of a matrix.
      * 
@@ -220,7 +221,7 @@ public class MatrixOperator extends RowOperator{
         }
         return transpose;
     }
-    
+
     /**
      * Returns the adjoint of the matrix to the user. Requires a square matrix.
      */
@@ -238,8 +239,7 @@ public class MatrixOperator extends RowOperator{
         String[][] adjoint = getTranspose(cofactorMatrix);
         return adjoint;
     }
-    
-    
+
     /**
      * Returns the inverse of the matrix, computed through the adjoint method, to the user. Requires
      * a square matrix.
@@ -263,7 +263,7 @@ public class MatrixOperator extends RowOperator{
         }
         return inverse;
     }
-    
+
     /**
      * Adds zero rows to the bottom of a matrix if the matrix has more columns than rows.
      * 
@@ -282,17 +282,17 @@ public class MatrixOperator extends RowOperator{
     	}
     	return tempMatrix;
     }
-    
+
     /**
      * Returns the basis vectors of the nullity/null space of of a matrix as columns of a matrix.
      * 1) The original matrix is row reduced to RREF.
      * 2) The RREF matrix is checked for leading 1's, with the rows being recorded as having a free
-     *    variable in the freeVar ArrayList or not having a free variable in the dependVar 
+     *    variable in the freeVar ArrayList or not having a free variable in the dependVar
      *    ArrayList. If the matrix has more columns than rows, the tempSquareMatrix method is called
-     *    to add zero rows to the bottom of the matrix. This ensures that every column is entered 
+     *    to add zero rows to the bottom of the matrix. This ensures that every column is entered
      *    into one of the ArrayLists.
-     * 3) The null space matrix is created, with each column being a basis vector for the null 
-     *    space. The non zero elements from the columns without leading 1's are placed in the 
+     * 3) The null space matrix is created, with each column being a basis vector for the null
+     *    space. The non zero elements from the columns without leading 1's are placed in the rows
      *    of the vectors that are scaled by their respective variables. The free variables are then
 		  placed in the rows in the vectors in their respective positions. All other elements in the
 		  array are given the value of "0".

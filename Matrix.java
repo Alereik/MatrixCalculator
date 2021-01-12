@@ -10,24 +10,24 @@ import java.util.Scanner;
  *
  */
 public class Matrix {
-    
+
     private String[][] matrix;
     private int numRows;
     private int numColumns;
     private MatrixOperator operator = new MatrixOperator();
     private PrintStringBuilder printer = new PrintStringBuilder();
-    
+
     public Matrix(Scanner input) {
         setDimensions(input);
         matrix = setMatrixArray(input);
     }
-    
+
     public Matrix(String[][] matrix) {
         this.numRows = matrix.length;
         this.numColumns = matrix[0].length;
         this.matrix = matrix;
     }
-    
+
     /**
      * Prompts the user to enter in the number of rows and columns that the new matrix will have. If
      * the input is not a number, the user is prompted again until a valid input is received. If the
@@ -52,7 +52,7 @@ public class Matrix {
         numColumns = numColumns < 1 ? numColumns + 1 : numColumns;
         input.nextLine();
     }
-    
+
     /**
      * Prompts the user to enter each element of the matrix to be used in computations. Each element
      * is checked for validity by calling the checkElementValidity method. If the user enters an 
@@ -84,7 +84,7 @@ public class Matrix {
         }
         return matrix;
     }
-       
+
     /**
      * Returns the number of rows in the matrix.
      * 
@@ -94,7 +94,7 @@ public class Matrix {
     	System.out.println("This matrix has " + numRows + " rows.");
         return numRows;
     }
-    
+
     /**
      * Returns the number of columns in the matrix.
      * 
@@ -104,7 +104,7 @@ public class Matrix {
     	System.out.println("This matrix has " + numColumns + " columns.");
         return numColumns;
     }
-    
+
     /**
      * Returns the matrix's two dimensional array.
      * 
@@ -113,7 +113,7 @@ public class Matrix {
     public String[][] getMatrixArray() {
         return matrix;
     }
-    
+
     /**
      * Outputs the matrix scaled by a specified scalar.
      */
@@ -131,13 +131,13 @@ public class Matrix {
     	String[][] scaledMatrix = operator.scaleMatrix(matrix, entry);
     	printer.printMatrix(scaledMatrix, numColumns);
     }
-        
+
     /**
-     * Outputs the inverse of a matrix, computed through row reduction, to the user . Requires a 
+     * Outputs the inverse of a matrix, computed through row reduction, to the user . Requires a
      * square matrix.
      * 
      * @param matrix The matrix to be inverted if possible.
-     * @param steps  Shows each row reduction step applied to the augmented matrix if true, or only 
+     * @param steps  Shows each row reduction step applied to the augmented matrix if true, or only
      *               the inverse if false.
      */
     public void getRowReducedInverse() {
@@ -150,7 +150,7 @@ public class Matrix {
         System.out.println("The inverse of this matrix is:");
         printer.printMatrix(inverse, inverse[0].length);
     }
-    
+
     /**
      * Outputs the inverse of the matrix, computed through the adjoint method, to the user. Requires
      * a square matrix.
@@ -165,7 +165,7 @@ public class Matrix {
         System.out.println("The inverse of this matrix is:");
         printer.printMatrix(inverse, numColumns);
     }
-    
+
     /**
      * Outputs the Reduced Row Echelon Form of a matrix to the user, showing each step of the 
      * row reduction process.
@@ -175,7 +175,7 @@ public class Matrix {
     public void getRREF() {
         operator.rowReduce(matrix, numColumns, true);
     }
-    
+
     /**
      * Outputs the transpose of a matrix.
      * 
@@ -185,7 +185,7 @@ public class Matrix {
         System.out.println("The transpose of this matrix is:");
         printer.printMatrix(transpose, transpose[0].length);
     }
-    
+
     /**
      * Outputs an upper triangular form of the matrix. Requires a square matrix. This method calls
      * the getUpperTriangularForm method in the RowOperator class. The first two dimensional element
@@ -201,7 +201,7 @@ public class Matrix {
         System.out.println("An upper triangular form of this matrix is:");
         printer.printMatrix(returned[0], numColumns);
     }
-    
+
     /**
      * Outputs the determinant of the matrix. Requires a square matrix. This method calls the 
      * getUpperTriangularForm method in the RowOperator class. The the second two dimension element 
@@ -215,7 +215,7 @@ public class Matrix {
         String[][][] returned = operator.getUpperTriangularForm(matrix);
         System.out.println("The determinant of this matrix is " + returned[1][0][0] + "\n");
     }
-    
+
     /**
      * Outputs the adjoint of the matrix to the user. Requires a square matrix.
      */
@@ -228,7 +228,7 @@ public class Matrix {
         String[][] adjoint = operator.getAdjoint(matrix);
         printer.printMatrix(adjoint, numColumns);
     }
-    
+
     /**
      * Outputs the kernel/nullity/null space of a matrix to the user.
      */
@@ -241,7 +241,7 @@ public class Matrix {
         	System.out.println("The null space of this matrix is {0}\n");
         }
     }
-    
+
     /**
      * Prints the matrix to the console.
      */

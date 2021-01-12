@@ -36,7 +36,7 @@ public class ElementOperator {
                 negativeFraction = true;
             }
         }
-        int smallerNum = (fractionArr[NUMERATOR] > fractionArr[DENOMINATOR]) ? 
+        int smallerNum = (fractionArr[NUMERATOR] > fractionArr[DENOMINATOR]) ?
             fractionArr[DENOMINATOR] : fractionArr[NUMERATOR];
             //smaller number is greatest POSSIBLE common factor
             for (int i = 1; i <= smallerNum; ++i) {
@@ -105,7 +105,6 @@ public class ElementOperator {
             sumFraction[NUMERATOR] = 
                 (firstFraction[NUMERATOR] * secondFraction[DENOMINATOR])
                 + (secondFraction[NUMERATOR] * firstFraction[DENOMINATOR]);
-
             sumFraction[DENOMINATOR] = 
                 (firstFraction[DENOMINATOR] * secondFraction[DENOMINATOR]);
         }
@@ -127,7 +126,7 @@ public class ElementOperator {
         }
         return sum;
     }
-    
+
     /**
      * Multiplies a fraction by another fraction by calling the splitFraction method to convert the 
      * numerical characters in the fractions string to integers, multiplying the numerators and 
@@ -169,7 +168,7 @@ public class ElementOperator {
         }
         return product;
     }
-    
+
     /**
      * Returns the reciprocal of an element. If element is "0", or the numerator of element is 0, 
      * then "0" is returned. Does not return whole numbers if the parameter numerator is 1. Instead,
@@ -206,7 +205,7 @@ public class ElementOperator {
         }
         return reciprocal;
     }
-    
+
     /**
      * Checks if a string entered by the user as an element in a vector or matrix is a valid number 
      * entry. Valid number entries are either string literals of whole numbers such as "-1" or 

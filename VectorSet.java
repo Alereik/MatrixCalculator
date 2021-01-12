@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  */
 public class VectorSet {
-	
+
 	private String[][] vectorSetArr;
 	private int numRows;
 	private int numColumns;
@@ -21,7 +21,7 @@ public class VectorSet {
 		setVectorCountAndLength(input);
 		vectorSetArr = setVectorSetArr(input);
 	}
-	
+
 	/**
 	 * Prompts the user to set the number of vectors and the length of those vectors.
 	 * 
@@ -34,17 +34,17 @@ public class VectorSet {
             System.out.println("Please enter a positive integer");
         }
         numColumns = Math.abs(input.nextInt());
-        numColumns = numColumns < 1 ? numColumns + 1 : numColumns;         
+        numColumns = numColumns < 1 ? numColumns + 1 : numColumns;
         System.out.println("How many elements will a vector in this set contain?");
         while (!input.hasNextInt()) {
             input.next();
             System.out.println("Please enter a positive integer");
         }
         numRows = Math.abs(input.nextInt());
-        numRows = numRows < 1 ? numRows + 1 : numRows;       
+        numRows = numRows < 1 ? numRows + 1 : numRows;
         input.nextLine();
 	}
-	
+
 	/**
 	 * Prompts the user to enter each element of each vector, one vector at a time. The vectors are
 	 * entered into an array as columns would be in a matrix, and are generally treated as such.
@@ -75,11 +75,16 @@ public class VectorSet {
         System.out.println("The set of vectors is now created.\n");
         return vectorSetArr;
 	}
-	
+
+	/**
+	 * Returns the two dimensional array containing the vector set.
+	 * 
+	 * @return
+	 */
 	public String[][] getVectorSetArr() {
 		return vectorSetArr;
 	}
-	
+
 	/**
 	 * Outputs whether or not a vector falls within the span of a set of vectors.
 	 * 
@@ -94,7 +99,7 @@ public class VectorSet {
 			System.out.println("This vector is not with the span of the set");
 		}
 	}
-	
+
 	/**
 	 * Outputs a vector with respect to a given basis set of vectors.
 	 * 
@@ -107,19 +112,20 @@ public class VectorSet {
 			printer.printVector(vWithRespectToS);
 		}
 		else {
-			System.out.println("Error: This option requires a basis for R^n.");
+			System.out.println("Error: This option requires a basis set containing only basis "
+					           + "vectors.");
 		}
 	}
-	
+
 	/**
 	 * Outputs whether or not the set is linearly independent to the user.
 	 * 
 	 * 
 	 */
 	public void getLinearDependence() {
-		operator.getLinearDependence(vectorSetArr, true);		
+		operator.getLinearDependence(vectorSetArr, true);
 	}
-	
+
 	/**
 	 * Outputs whether or not a set of vectors forms a basis for R^n.
 	 */
