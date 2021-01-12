@@ -112,7 +112,7 @@ public class VectorSet {
 			printer.printVector(vWithRespectToS);
 		}
 		else {
-			System.out.println("Error: This option requires a basis set containing only basis "
+			System.out.println("Error: This option requires a set containing only basis "
 					           + "vectors.");
 		}
 	}
