@@ -22,9 +22,9 @@ The Following can be computed with a set of vectors.
   - Determine if a vector is within the span of a set
   - Determine if a set is linearly independent
   - Determine if a set forms a basis for R^n
-  - Get a vector with respect to a basis set
+  - Get a vector with respect to a basis
   - Apply the Gram-Schmidt process to a set in order to compute an orthogonal basis
-  - Compute an orthogonal complement to an orthogonal basis
+  - Compute an orthogonal complement (W perp) to an orthogonal basis
 
 PrintStringBuilder - Creates strings that visually represents matrices, augmeneted matrices, and null space displays that can be printed to the console.
 
