@@ -1,7 +1,7 @@
 # LinearAlgebraCalculator
 A calculator for solving linear algebra problems.
 
-The matrix elements are whole number and fraction string literals, not doubles or floats.
+The matrix and vector elements are whole number and fraction string literals, not doubles or floats.
 
 The operations performed on these matrices are not limited by the size of a given matrix (Although computation time increases the larger they become).
 
