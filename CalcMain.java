@@ -314,10 +314,11 @@ public class CalcMain {
 					+ "       [2] Determine if the set is linearly independent\n"
 					+ "       [3] Determine if the set forms a basis for R^n\n"
 					+ "       [4] Transform a vector to a vector with respect to a basis\n"
-					+ "       [5] Apply the Gram-Schmidt process to compute an orthogonal basis\n\n"
+					+ "       [5] Apply the Gram-Schmidt process to compute an orthogonal basis\n"
+					+ "       [6] Show current set of vectors\n\n"
 					+ "       [90] Quit");
 			int userChoice = 99;
-			while ((userChoice < 0 || userChoice > 8 ) && userChoice != 90) {
+			while ((userChoice < 0 || userChoice > 6 ) && userChoice != 90) {
 				while(!input.hasNextInt()) {
 					input.next();
 				}
@@ -344,6 +345,10 @@ public class CalcMain {
 			case 5:
 				vectorSet.getOrthogonalBasis();
 				orthogonalComplement(input, vectorSet, operator);
+				enterToContinue();
+				break;
+			case 6:
+				vectorSet.print();
 				enterToContinue();
 				break;
 			case 90:

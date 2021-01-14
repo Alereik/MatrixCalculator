@@ -165,4 +165,12 @@ public class VectorSet {
         	System.out.println("The orthogonal complement is {0}\n");
         }
 	}
+
+	/**
+	 * Prints the vector set to the console.
+	 */
+	public void print() {
+		System.out.println("Your current set of vectors:");
+		printer.printVectorSet(vectorSetArr);
+	}
 }
