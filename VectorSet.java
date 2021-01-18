@@ -147,7 +147,7 @@ public class VectorSet {
 		String[][] orthogonalBasis = operator.applyGramSchmidt(vectorSetArr);
 		System.out.println("This set was transformed into the orthogonal basis below:");
 		printer.printVectorSet(orthogonalBasis);
-	}	
+	}
 
 	/**
 	 * Outputs the orthogonal complement of the span of the set of vectors.

@@ -313,7 +313,7 @@ public class VectorSetOperator extends MatrixOperator{
 		orthogonalBasis = getTranspose(orthogonalBasis);//transpose vectors back to second dimension
 		return orthogonalBasis;
 	}
-	
+
 	/**
 	 * Computes a transition matrix from one basis set to another.
 	 * 1) An augmented matrix array is created with the first set of vectors forming the first 
