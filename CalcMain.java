@@ -201,11 +201,6 @@ public class CalcMain {
 		MatrixOperator operator = new MatrixOperator();
 		Matrix oneMatrix = new Matrix(input);
 		Matrix twoMatrix = new Matrix(input);
-		if (oneMatrix.getMatrixArray().length < 2 || oneMatrix.getMatrixArray()[0].length < 2 
-		    || twoMatrix.getMatrixArray().length < 2 || twoMatrix.getMatrixArray()[0].length < 2) {
-			System.out.println("Vectors are not supported by this option.\n");
-			return;
-		}
 		System.out.println("Your matrices are now created.\n");
 		boolean done = false;
 		while(!done) {
