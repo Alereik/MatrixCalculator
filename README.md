@@ -39,6 +39,6 @@ VectorSetOperator - Performs operations on sets of vectors.
 
 Matrix - The matrix object that many functions can be performed on.
 
-VectorSet - A set of vectors from which computations can be performed on, and for which vectors can be assesed as to their relation to.
+VectorSet - A set of vectors on which computations can be performed, and for which vectors can be assesed as to their relation to.
 
 CalcMain - The location of menus and user input.
