@@ -27,7 +27,7 @@ The Following can be computed with a set of vectors.
   - Apply the Gram-Schmidt process to a set in order to compute an orthogonal basis
   - Compute an orthogonal complement (W perp) to an orthogonal basis
 
-PrintStringBuilder - Creates strings that visually represent matrices, augmeneted matrices, and null spaces that can be printed to the console.
+PrintStringBuilder - Creates strings that visually represent matrices, augmented matrices, and null spaces that can be printed to the console.
 
 ElementOperator - Performs basic arithmetic operations on elements of a matrix.
 
