@@ -9,7 +9,7 @@ The following can be computed for a given matrix/ces of appropriate dimensions.
   - Reduced Row Echelon Form
   - Adjoint
   - Inverse through row reduction
-  - Inverse through adjoint method
+  - Inverse through adjoint scaled by the reciprocal of the determinant
   - Transpose
   - Upper Triangular Form
   - Determinant
