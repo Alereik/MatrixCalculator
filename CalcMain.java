@@ -25,7 +25,7 @@ public class CalcMain {
 				  + "       - Upper Triangular Form                   is linearly independent\n"
 				  + "       - Transpose                             - Determine if the set forms\n"
 				  + "       - Determinant                             a basis for R^n\n"
-				  + "       - Null Space                            - Get a vector with\n"
+				  + "       - Null Space                            - Compute a vector with\n"
 				  + "       - Scalar Multiple                         respect to a basis\n"
 				  + "                                               - Compute a transition matrix\n"
 				  + "          [Enter 2]                              from one basis to another\n"				  

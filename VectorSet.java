@@ -101,7 +101,7 @@ public class VectorSet {
 	}
 
 	/**
-	 * Outputs a vector with respect to a given basis set of vectors.
+	 * Outputs a vector transformed with respect to a given basis set of vectors.
 	 * 
 	 * @param input The scanner that obtains the user's input.
 	 */
