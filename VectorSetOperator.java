@@ -313,4 +313,45 @@ public class VectorSetOperator extends MatrixOperator{
 		orthogonalBasis = getTranspose(orthogonalBasis);//transpose vectors back to second dimension
 		return orthogonalBasis;
 	}
+	
+	/**
+	 * Computes a transition matrix from one basis set to another.
+	 * 1) An augmented matrix array is created with the first set of vectors forming the first 
+	 *    columns, and the second set of vectors forming the remaining columns.
+	 * 2) The augments matrix is row reduced until the first set of vectors has been transformed 
+	 *    into the identity matrix. The resulting elements in the columns of the second set of 
+	 *    vectors comprise the transition matrix.
+	 * 3) The columns containing the transition matrix are extracted from the augmented matrix and
+	 *    returned.
+	 * 
+	 * @param vectorSetArr1     The first basis set of vectors.
+	 * @param vectorSetArr2     The second basis set of vectors.
+	 * @return transitionMatrix The resulting transition matrix.
+	 */
+	public String[][] getTransitionMatrix(String[][] vectorSetArr1, String[][] vectorSetArr2) {
+		int augMatrixNumRows = vectorSetArr1.length;
+		int augMatrixNumCols = vectorSetArr1[0].length + vectorSetArr2[0].length;
+		String[][] augmentedMatrix = new String[augMatrixNumRows][augMatrixNumCols];
+		//crate augmented matrix of the two sets
+		for (int j = 0; j < augMatrixNumCols; ++j) {
+			for (int i = 0; i < augMatrixNumRows; ++i) {
+				if (j < vectorSetArr1[0].length) {
+					augmentedMatrix[i][j] = vectorSetArr1[i][j];
+				}
+				else {
+					augmentedMatrix[i][j] = vectorSetArr2[i][j - vectorSetArr1.length];
+				}                                           // ^ j minus the width of the first set
+			}
+		}
+		//row reduce until vectorSetArr1 is identity matrix
+		augmentedMatrix = rowReduce(augmentedMatrix, vectorSetArr1[0].length, true);
+		//extract transition matrix from augmented matrix
+		String[][] transitionMatrix = new String[vectorSetArr2.length][vectorSetArr2[0].length];
+		for (int j = vectorSetArr1[0].length; j < augMatrixNumCols; ++j) {
+			for (int i = 0; i < augMatrixNumRows; ++i) {
+				transitionMatrix[i][j - vectorSetArr1.length] = augmentedMatrix[i][j];
+			}
+		}
+		return transitionMatrix;
+	}
 }

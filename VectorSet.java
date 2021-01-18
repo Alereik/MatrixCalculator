@@ -167,6 +167,35 @@ public class VectorSet {
 	}
 
 	/**
+	 * Outputs the transition matrix from the first basis set of vectors to the second basis set.
+	 * Only produces a transition matrix if both sets of vectors form bases.
+	 * 
+	 * @param input The scanner that obtains the user's input.
+	 */
+	public void getTransitionMatrix(Scanner input) {
+		VectorSet vectorSet2 = new VectorSet(input);
+		//check both sets to ensure they are the same size
+		if (vectorSetArr.length != vectorSet2.getVectorSetArr().length
+		      || vectorSetArr[0].length != vectorSet2.getVectorSetArr()[0].length) {
+			System.out.println("Error: Both sets must have the same dimensions and number of"
+					           + " vectors");
+			return;
+		}
+		//check both sets of vectors to ensure that they both form bases
+		if (!operator.getIsBasisForRn(vectorSetArr, false)
+		      || !operator.getIsBasisForRn(vectorSet2.getVectorSetArr(), false)) {
+			System.out.println("Error: Both sets of vectors must form bases");
+			return;
+		}
+		int changeOfBasisRows = vectorSet2.getVectorSetArr().length;
+		int changeOfBasisCols = vectorSet2.getVectorSetArr()[0].length;
+		String[][] transitionMatrix = new String[changeOfBasisRows][changeOfBasisCols];
+		transitionMatrix = operator.getTransitionMatrix(vectorSetArr, vectorSet2.getVectorSetArr());
+		System.out.println("The tranisiton matrix from the first basis to the second is:");
+		printer.printMatrix(transitionMatrix, changeOfBasisCols);
+	}
+
+	/**
 	 * Prints the vector set to the console.
 	 */
 	public void print() {

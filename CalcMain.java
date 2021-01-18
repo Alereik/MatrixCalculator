@@ -27,12 +27,14 @@ public class CalcMain {
 				  + "       - Determinant                             a basis for R^n\n"
 				  + "       - Null Space                            - Get a vector with\n"
 				  + "       - Scalar Multiple                         respect to a basis\n"
-				  + "                                               - Apply the Gram-Schmidt\n"
-				  + "          [Enter 2]                              process to compute an\n"
-				  + "  Build two matrices in order to:                orthogonal basis\n"
-				  + "      - Multiply Matrices                      - Compute an orthogonal\n"
-				  + "      - Add Matrices                             complement to an \n"
-				  + "      - Subtract Matrices                        orthogonal basis\n\n"
+				  + "                                               - Compute a transition matrix\n"
+				  + "          [Enter 2]                              from one basis to another\n"				  
+				  + "  Build two matrices in order to:              - Apply the Gram-Schmidt\n"
+				  + "      - Multiply Matrices                        process to compute an\n"
+				  + "      - Add Matrices                             orthogonal basis\n"
+				  + "      - Subtract Matrices                      - Compute an orthogonal\n"
+				  + "                                                 complement to an \n"
+				  + "                                                 orthogonal basis\n\n"
 				  + "                                                     [Enter 0]\n"
 				  + "                                                      - Quit\n");
 			int userChoice = 99;
@@ -314,8 +316,9 @@ public class CalcMain {
 					+ "       [2] Determine if the set is linearly independent\n"
 					+ "       [3] Determine if the set forms a basis for R^n\n"
 					+ "       [4] Transform a vector to a vector with respect to a basis\n"
-					+ "       [5] Apply the Gram-Schmidt process to compute an orthogonal basis\n"
-					+ "       [6] Show current set of vectors\n\n"
+					+ "       [5] Compute a transition matrix from one basis to another\n"
+					+ "       [6] Apply the Gram-Schmidt process to compute an orthogonal basis\n"
+					+ "       [7] Show current set of vectors\n\n"
 					+ "       [90] Quit");
 			int userChoice = 99;
 			while ((userChoice < 0 || userChoice > 6 ) && userChoice != 90) {
@@ -343,11 +346,15 @@ public class CalcMain {
 				enterToContinue();
 				break;
 			case 5:
+				vectorSet.getTransitionMatrix(input);
+				enterToContinue();
+				break;
+			case 6:
 				vectorSet.getOrthogonalBasis();
 				orthogonalComplement(input, vectorSet, operator);
 				enterToContinue();
 				break;
-			case 6:
+			case 7:
 				vectorSet.print();
 				enterToContinue();
 				break;
