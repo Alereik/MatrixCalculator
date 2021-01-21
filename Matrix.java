@@ -161,6 +161,12 @@ public class Matrix {
             System.out.println("This matrix is not invertible\n");
             return;
         }
+        getAdjoint();
+        getDeterminant();
+        String reciprocal = 
+              operator.getReciprocal(operator.getUpperTriangularForm(matrix)[1][0][0]);
+        System.out.println("The adjoint, scaled by reciprocal of the determinant" 
+              + "(" +  reciprocal + ") is the inverse\n");
         String[][] inverse = operator.getAdjointInverse(matrix);
         System.out.println("The inverse of this matrix is:");
         printer.printMatrix(inverse, numColumns);
