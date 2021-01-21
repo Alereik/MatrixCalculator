@@ -5,7 +5,7 @@ The matrix and vector elements are string literals of whole numbers and fraction
 
 The operations performed on matrices are not limited by the size of a given matrix/matrices (Although computation time increases the larger they become).
 
-The following can be computed for a given matrix/ces of appropriate dimensions.
+The following can be computed for a given matrix/matrices of appropriate dimensions.
   - Reduced Row Echelon Form
   - Adjoint
   - Inverse through row reduction
