@@ -316,7 +316,7 @@ public class CalcMain {
 					+ "       [7] Show current set of vectors\n\n"
 					+ "       [90] Quit");
 			int userChoice = 99;
-			while ((userChoice < 0 || userChoice > 6 ) && userChoice != 90) {
+			while ((userChoice < 0 || userChoice > 7 ) && userChoice != 90) {
 				while(!input.hasNextInt()) {
 					input.next();
 				}
