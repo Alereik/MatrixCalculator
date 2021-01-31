@@ -119,7 +119,7 @@ public class ElementOperator {
         }
         //denominator of 1
         else if (sumFraction[DENOMINATOR] == 1) {
-            sum = String.valueOf(sumFraction[NUMERATOR]);
+            sum = Integer.toString(sumFraction[NUMERATOR]);
         }
         else {
             sum += sumFraction[NUMERATOR] + "/" + sumFraction[DENOMINATOR];
@@ -160,7 +160,7 @@ public class ElementOperator {
         }
         //denominator equal to 1
         else if (productFraction[DENOMINATOR] == 1) {
-            product = String.valueOf(productFraction[NUMERATOR]);
+            product = Integer.toString(productFraction[NUMERATOR]);
         }
         else {
             product = productFraction[NUMERATOR] + "/" 

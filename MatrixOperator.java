@@ -62,7 +62,7 @@ public class MatrixOperator extends RowOperator{
         String[][] minor = getSubMatrix(matrix, row, column);
         ++row;//increment row and column for correct computation of sign
         ++column;
-        String sign = String.valueOf((int) Math.pow(-1, row + column));
+        String sign = Integer.toString((int) Math.pow(-1, row + column));
         String subDeterminant = getUpperTriangularForm(minor)[1][0][0];
         String cofactor = fractionMultiplication(sign, subDeterminant);
         return cofactor;

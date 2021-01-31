@@ -227,7 +227,7 @@ public class VectorSetOperator extends MatrixOperator{
 				int[] splitFraction = splitFraction(vector[i]);
 				denominator = splitFraction[1];
 				if (denominator > Integer.parseInt(scalar)) {
-					scalar = String.valueOf(denominator);
+					scalar = Integer.toString(denominator);
 				}
 			}
 		}
