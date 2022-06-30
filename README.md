@@ -25,7 +25,7 @@ The Following can be computed with a set of vectors.
   - Transformation of a vector with respect to a basis
   - Computation of a transition matrix from one basis set to another
   - Application of the Gram-Schmidt process to a set in order to compute an orthogonal basis
-  - Computation of an orthogonal complement (W perp) to an orthogonal basis
+  - Computation of an orthogonal complement (W⟘) to an orthogonal basis
 
 PrintStringBuilder - Creates strings that visually represent matrices, augmented matrices, and null spaces that can be printed to the console.
 
