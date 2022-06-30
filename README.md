@@ -19,13 +19,13 @@ The following can be computed for a given matrix/matrices of appropriate dimensi
   - Matrix addition/subtraction
   
 The Following can be computed with a set of vectors.
-  - Determine if a vector is within the span of a set
-  - Determine if a set is linearly independent
-  - Determine if a set forms a basis for R^n
-  - Compute a vector with respect to a basis
-  - Compute a transition matrix from one basis set to another
-  - Apply the Gram-Schmidt process to a set in order to compute an orthogonal basis
-  - Compute an orthogonal complement (W perp) to an orthogonal basis
+  - Determination of whether a vector is within the span of a set
+  - Determination of whether a set is linearly independent
+  - Determination of whether a set forms a basis for R^n
+  - Computation of a vector with respect to a basis
+  - Computation of a transition matrix from one basis set to another
+  - Application of the Gram-Schmidt process to a set in order to compute an orthogonal basis
+  - Computation of an orthogonal complement (W perp) to an orthogonal basis
 
 PrintStringBuilder - Creates strings that visually represent matrices, augmented matrices, and null spaces that can be printed to the console.
 
