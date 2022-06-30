@@ -22,7 +22,7 @@ The Following can be computed with a set of vectors.
   - Determination of whether a vector is within the span of a set
   - Determination of whether a set is linearly independent
   - Determination of whether a set forms a basis for R^n
-  - Computation of a vector with respect to a basis
+  - Transformation of a vector with respect to a basis
   - Computation of a transition matrix from one basis set to another
   - Application of the Gram-Schmidt process to a set in order to compute an orthogonal basis
   - Computation of an orthogonal complement (W perp) to an orthogonal basis
